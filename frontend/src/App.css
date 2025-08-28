@@ -1,34 +1,164 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Studiova Theme - Additional custom styles for Spanzor */
+
+.page-wrapper {
+  overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Custom animations for leaf icons */
+.animate-spin {
+  animation: gentle-spin 8s linear infinite;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+@keyframes gentle-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.App-link {
-    color: #61dafb;
+/* Enhanced hover effects for cards */
+.card:hover {
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Google Sign-in button styling */
+.google-signin-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Custom form focus states */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--bs-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(193, 255, 114, 0.25) !important;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix for mobile menu dropdown positioning */
+.dropdown-menu {
+  min-width: 320px;
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    min-width: 280px;
+  }
+}
+
+/* Enhanced button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 12px 24px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background: var(--bs-primary);
+  color: var(--bs-dark);
+  border-color: var(--bs-primary);
+}
+
+.btn-primary:hover {
+  background: var(--bs-primary);
+  color: var(--bs-dark);
+  opacity: 0.9;
+}
+
+/* Enhanced spacing for sections */
+.py-xl-12 {
+  padding-top: 8rem !important;
+  padding-bottom: 8rem !important;
+}
+
+/* Improved mobile responsiveness */
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .fs-16 {
+    font-size: 2.5rem !important;
+  }
+  
+  .py-xl-12 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+/* Loading animation for form submission */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Alert animations */
+.alert {
+  animation: slideInDown 0.5s ease;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Badge enhancements */
+.badge {
+  font-weight: 600;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+/* Round utility classes */
+.round-36 {
+  width: 36px;
+  height: 36px;
+}
+
+.round-45 {
+  width: 45px;
+  height: 45px;
+}
+
+.round-52 {
+  width: 52px;
+  height: 52px;
+}
+
+.round-64 {
+  width: 64px;
+  height: 64px;
+}
+
+.round-490 {
+  width: 490px;
+  height: 490px;
 }
