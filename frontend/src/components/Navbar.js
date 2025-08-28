@@ -4,8 +4,8 @@ export default function Navbar() {
       <div className="container">
         <div className="header-wrapper d-flex align-items-center justify-content-between">
           <div className="logo">
-            <a href="#" className="logo-white">
-              <img src="/assets/images/logos/logo-white.svg" alt="Spanzor" className="img-fluid" style={{height: '40px'}} />
+            <a href="#" className="logo-white d-flex align-items-center">
+              <span className="spanzor-brand">Spanzor.</span>
             </a>
           </div>
           <div className="d-flex align-items-center gap-4">
