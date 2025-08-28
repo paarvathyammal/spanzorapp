@@ -1,12 +1,41 @@
 export default function Hero() {
   return (
-    <section className="hero">
+    <section id="hero" className="banner-section position-relative d-flex align-items-end min-vh-100">
+      <div className="position-absolute top-0 start-0 w-100 h-100" style={{
+        background: 'linear-gradient(135deg, #1F2A2E 0%, #2A3B40 50%, #1F2A2E 100%)',
+        opacity: 0.95
+      }}></div>
+      
       <div className="container">
-        <h1>Find, Collaborate & Grow with Influencers</h1>
-        <p>India’s next‑gen platform connecting brands with creators to run powerful, measurable campaigns across Instagram, YouTube and beyond.</p>
-        <div className="cta-row">
-          <a href="#contact" className="btn btn-primary">Get Started</a>
-          <a href="#packages" className="btn btn-outline">View Packages</a>
+        <div className="d-flex flex-column gap-4 pb-8 position-relative z-1">
+          <div className="row align-items-center">
+            <div className="col-xl-8">
+              <div className="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                <img src="/assets/images/svgs/primary-leaf.svg" alt="" className="img-fluid animate-spin" />
+                <p className="mb-0 text-white fs-5 text-opacity-70">
+                  India's <span className="text-primary">next-generation</span> platform connecting brands with creators to run powerful, measurable campaigns.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            <h1 className="mb-0 fs-16 text-white lh-1">Find, Collaborate & Grow with Influencers</h1>
+            <a href="#contact" className="p-1 ps-7 bg-primary rounded-pill">
+              <span className="bg-white round-52 rounded-circle d-flex align-items-center justify-content-center">
+                <iconify-icon icon="lucide:arrow-up-right" className="fs-8 text-dark"></iconify-icon>
+              </span>
+            </a>
+          </div>
+          <div className="d-flex gap-3 flex-wrap mt-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+            <a href="#contact" className="btn">
+              <span className="btn-text">Get Started</span>
+              <iconify-icon icon="lucide:arrow-up-right" className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+            </a>
+            <a href="#packages" className="btn border border-white border-opacity-25">
+              <span className="btn-text">View Packages</span>
+              <iconify-icon icon="lucide:arrow-up-right" className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+            </a>
+          </div>
         </div>
       </div>
     </section>
