@@ -1,12 +1,12 @@
 export default function InfluencerCategories() {
   const categories = [
-    { title: "Emerging Voices", range: "20K–50K", description: "Fresh perspectives from rising talents" },
-    { title: "Growth Champions", range: "50K–500K", description: "Proven engagement with growing audiences" },
-    { title: "Rising Icons", range: "500K–2M", description: "Established voices with strong influence" },
-    { title: "Premium", range: "2M–10M", description: "High-impact creators with massive reach" },
-    { title: "Elite", range: "10M–25M", description: "Top-tier influencers with premium audiences" },
-    { title: "Super Elite", range: "25M–50M", description: "Celebrity-level creators with global reach" },
-    { title: "Legendary", range: "50M+", description: "Ultra-exclusive mega-influencers" }
+    { title: "Emerging Voices", range: "20K–50K", description: "Fresh perspectives from rising talents", metric: "5,200+ creators" },
+    { title: "Growth Champions", range: "50K–500K", description: "Proven engagement with growing audiences", metric: "3,800+ creators" },
+    { title: "Rising Icons", range: "500K–2M", description: "Established voices with strong influence", metric: "1,500+ creators" },
+    { title: "Premium", range: "2M–10M", description: "High-impact creators with massive reach", metric: "800+ creators" },
+    { title: "Elite", range: "10M–25M", description: "Top-tier influencers with premium audiences", metric: "200+ creators" },
+    { title: "Super Elite", range: "25M–50M", description: "Celebrity-level creators with global reach", metric: "85+ creators" },
+    { title: "Legendary", range: "50M+", description: "Ultra-exclusive mega-influencers", metric: "25+ creators" }
   ];
 
   return (
@@ -26,7 +26,7 @@ export default function InfluencerCategories() {
                 <div className="col-xxl-8">
                   <div className="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
                     <h2 className="mb-0">Influencer Categories</h2>
-                    <p className="fs-5 mb-0">Choose the creator tier that matches your goals and budget. From emerging voices to legendary influencers.</p>
+                    <p className="fs-5 mb-0">Choose the creator tier that matches your goals and budget. Our curated network spans from emerging voices to legendary influencers across all categories.</p>
                   </div>
                 </div>
               </div>
@@ -37,7 +37,8 @@ export default function InfluencerCategories() {
                       <h3 className="mb-0 fs-14">{category.range}</h3>
                       <div>
                         <h4 className="mb-2">{category.title}</h4>
-                        <p className="mb-0">{category.description}</p>
+                        <p className="mb-2">{category.description}</p>
+                        <p className="mb-0 text-primary fw-semibold">{category.metric}</p>
                       </div>
                     </div>
                   </div>
@@ -60,10 +61,11 @@ export default function InfluencerCategories() {
                   </div>
                   <div>
                     <h5 className="mb-2">{category.title}</h5>
-                    <p className="mb-0 text-muted">{category.description}</p>
+                    <p className="mb-2 text-muted">{category.description}</p>
+                    <p className="mb-0 text-primary fw-semibold fs-6">{category.metric}</p>
                   </div>
                   <a href="#packages" className="btn btn-outline-primary mt-auto">
-                    <span className="btn-text">Explore Plans</span>
+                    <span className="btn-text">Explore This Category</span>
                     <iconify-icon icon="lucide:arrow-up-right" className="btn-icon ms-2 fs-6"></iconify-icon>
                   </a>
                 </div>
