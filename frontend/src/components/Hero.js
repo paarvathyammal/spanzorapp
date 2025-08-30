@@ -55,7 +55,21 @@ export default function Hero() {
             data-aos-duration="1000"
           >
             {/* Button 1: Influencer → #contact */}
-            <a href="#contact" className="btn">
+            <a
+              href="#contact"
+              className="btn btn-animate"
+              data-aos="fade-up"
+              data-aos-delay="320"
+              data-aos-duration="900"
+              onClick={(e) => {
+                const t = e.currentTarget;
+                const r = t.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                t.style.setProperty('--ripple-x', `${x}px`);
+                t.style.setProperty('--ripple-y', `${y}px`);
+              }}
+            >
               <span className="btn-text">I’m an Influencer</span>
               <iconify-icon
                 icon="lucide:arrow-up-right"
@@ -64,7 +78,21 @@ export default function Hero() {
             </a>
 
             {/* Button 2: Brand → #packages */}
-            <a href="#packages" className="btn border border-white border-opacity-25">
+            <a
+              href="#packages"
+              className="btn border border-white border-opacity-25 btn-animate btn-ghost"
+              data-aos="fade-up"
+              data-aos-delay="380"
+              data-aos-duration="900"
+              onClick={(e) => {
+                const t = e.currentTarget;
+                const r = t.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                t.style.setProperty('--ripple-x', `${x}px`);
+                t.style.setProperty('--ripple-y', `${y}px`);
+              }}
+            >
               <span className="btn-text">I’m a Brand</span>
               <iconify-icon
                 icon="lucide:arrow-up-right"
