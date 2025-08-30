@@ -3,26 +3,28 @@ import { useEffect, useRef, useState } from 'react';
 export default function ContactSection() {
   const [status, setStatus] = useState(null);
   const [googleUser, setGoogleUser] = useState(null);
-  const [role, setRole] = useState(''); // NEW: capture which role signed in
-  const [responseMessage, setResponseMessage] = useState(''); // auto-hide toast message
+  const [role, setRole] = useState('');
+  const [responseMessage, setResponseMessage] = useState('');
+
   useEffect(() => {
     if (responseMessage) {
       const timer = setTimeout(() => {
         setResponseMessage('');
         setStatus(null);
-      }, 5000); // hide after 5 seconds
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [responseMessage]);
 
   const cityInputRef = useRef(null);
 
-  // NEW: single GIS button ref + live role ref
   const googleBtnRef = useRef(null);
   const roleRef = useRef('');
-  useEffect(() => { roleRef.current = role; }, [role]);
+  useEffect(() => {
+    roleRef.current = role;
+  }, [role]);
 
-  // Load Google Maps Places Autocomplete (unchanged)
+  // Load Google Maps Places Autocomplete
   useEffect(() => {
     const existing = document.querySelector('script[data-google-maps]');
     if (!existing) {
@@ -42,7 +44,7 @@ export default function ContactSection() {
     }
   }, []);
 
-  // Load Google Identity Services and render ONE button (role chosen via chips)
+  // Load Google Identity Services and render ONE button
   useEffect(() => {
     const existing = document.querySelector('script[data-gis]');
     if (!existing) {
@@ -83,13 +85,11 @@ export default function ContactSection() {
       setGoogleUser({ name: payload.name, email: payload.email });
       setRole(asRole || '');
 
-      // Prefill visible inputs
       const nameField = document.querySelector('input[name="name"]');
       const emailField = document.querySelector('input[name="email"]');
       if (nameField && payload.name) nameField.value = payload.name;
       if (emailField && payload.email) emailField.value = payload.email;
 
-      // Update hidden role too
       const roleField = document.querySelector('input[name="role"]');
       if (roleField) roleField.value = asRole || '';
     } catch (e) {
@@ -97,38 +97,49 @@ export default function ContactSection() {
     }
   }
 
-  // Sign out / revoke Google session and clear local state
+  // Sign out / revoke Google session
   function handleSignOut() {
     try {
-      // Revoke the token for this email if available
       if (googleUser?.email && window.google?.accounts?.id?.revoke) {
-        window.google.accounts.id.revoke(googleUser.email, () => {
-          // no-op; we'll clear local state below
-        });
+        window.google.accounts.id.revoke(googleUser.email, () => {});
       }
-      // Disable auto select for one-tap (belt & suspenders)
       if (window.google?.accounts?.id?.disableAutoSelect) {
         window.google.accounts.id.disableAutoSelect();
       }
-    } catch (e) {
-      // swallow any GIS errors; continue clearing local state
-    }
+    } catch {}
 
-    // Clear UI state
     setGoogleUser(null);
     setRole('');
     setStatus(null);
     setResponseMessage('');
 
-    // Reset any visible form (in case one is open)
     const form = document.querySelector('#contact form');
     if (form) {
-      try { form.reset(); } catch {}
+      try {
+        form.reset();
+      } catch {}
     }
 
-    // Also clear hidden role input if present
     const roleField = document.querySelector('input[name="role"]');
     if (roleField) roleField.value = '';
+  }
+
+  // Track role selection in GA4
+  function handleRoleSelect(newRole) {
+    setRole(newRole);
+    try {
+      window.gtag &&
+        window.gtag('event', 'select_item', {
+          item_list_name: 'signup_role',
+          items: [
+            {
+              item_id: newRole.toLowerCase(),
+              item_name: newRole,
+              item_category: 'role',
+            },
+          ],
+        });
+    } catch {}
   }
 
   // Submit to Formspree only
@@ -137,7 +148,6 @@ export default function ContactSection() {
     const form = e.target;
 
     try {
-      // Optional reCAPTCHA v3
       await new Promise((resolve, reject) => {
         if (!window.grecaptcha) return resolve();
         window.grecaptcha.ready(() => {
@@ -238,8 +248,20 @@ export default function ContactSection() {
 
                     {/* Role chips */}
                     <div className="d-flex gap-2">
-                      <button type="button" onClick={() => setRole('Influencer')} className={`btn btn-sm ${role === 'Influencer' ? 'btn-primary' : 'btn-outline-secondary'}`}>Influencer</button>
-                      <button type="button" onClick={() => setRole('Brand')} className={`btn btn-sm ${role === 'Brand' ? 'btn-primary' : 'btn-outline-secondary'}`}>Brand</button>
+                      <button
+                        type="button"
+                        onClick={() => handleRoleSelect('Influencer')}
+                        className={`btn btn-sm ${role === 'Influencer' ? 'btn-primary' : 'btn-outline-secondary'}`}
+                      >
+                        Influencer
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleRoleSelect('Brand')}
+                        className={`btn btn-sm ${role === 'Brand' ? 'btn-primary' : 'btn-outline-secondary'}`}
+                      >
+                        Brand
+                      </button>
                     </div>
                     <small className="text-muted">Choose a role, then sign in with Google to unlock the form</small>
 
@@ -254,7 +276,9 @@ export default function ContactSection() {
                             Signed in as <strong>{googleUser.name}</strong> ({googleUser.email}) — {role || 'Role not set'}
                           </span>
                         </div>
-                        <button type="button" onClick={handleSignOut} className="btn btn-sm btn-outline-secondary">Sign out</button>
+                        <button type="button" onClick={handleSignOut} className="btn btn-sm btn-outline-secondary">
+                          Sign out
+                        </button>
                       </div>
                     )}
                   </div>
@@ -278,7 +302,9 @@ export default function ContactSection() {
                   {!role && (
                     <div className="alert alert-info d-flex align-items-center gap-2 mb-0">
                       <iconify-icon icon="lucide:info" className="fs-5"></iconify-icon>
-                      <span>Please choose a role above — Continue with Google as <strong>Influencer</strong> or <strong>Brand</strong> to view the form.</span>
+                      <span>
+                        Please choose a role above — Continue with Google as <strong>Influencer</strong> or <strong>Brand</strong> to view the form.
+                      </span>
                     </div>
                   )}
 
