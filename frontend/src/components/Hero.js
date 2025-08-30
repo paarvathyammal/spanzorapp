@@ -114,15 +114,17 @@ export default function Hero() {
           </div>
 
           <div
-            className="d-flex align-items-center justify-content-end pe-4 social-row"
+            className="d-flex align-items-center justify-content-end pe-4 social-row position-relative"
             data-aos="fade-up"
             data-aos-delay="420"
             data-aos-duration="900"
           >
-            <iconify-icon icon="ri:youtube-fill" class="social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
-            <iconify-icon icon="simple-icons:youtubeshorts" class="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
-            <iconify-icon icon="ri:instagram-fill" class="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
-            <iconify-icon icon="ri:facebook-fill" class="social-icon" aria-label="Facebook" role="img"></iconify-icon>
+            <div className="social-icons-wrapper">
+              <iconify-icon icon="ri:youtube-fill" class="social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
+              <iconify-icon icon="simple-icons:youtubeshorts" class="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
+              <iconify-icon icon="ri:instagram-fill" class="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
+              <iconify-icon icon="ri:facebook-fill" class="social-icon" aria-label="Facebook" role="img"></iconify-icon>
+            </div>
           </div>
         </div>
       </div>
@@ -140,6 +142,13 @@ export default function Hero() {
         .social-row .social-icon[icon="simple-icons:youtubeshorts"] { color: #FF0000; }
         .social-row .social-icon[icon="ri:instagram-fill"] { color: #E1306C; }
         .social-row .social-icon[icon="ri:facebook-fill"] { color: #1877F2; }
+        .social-icons-wrapper {
+          position: absolute;
+          top: -40px; /* align vertically with buttons */
+          right: 20%; /* roughly place in the middle between Brand button and right edge */
+          display: flex;
+          gap: 1.5rem;
+        }
         @media (min-width: 992px) {
           .social-row .social-icon { font-size: 4rem !important; }
         }
