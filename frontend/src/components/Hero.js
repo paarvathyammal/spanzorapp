@@ -144,7 +144,7 @@ export default function Hero() {
         .social-row .social-icon[icon="ri:facebook-fill"] { color: #1877F2; }
         .social-icons-wrapper {
           position: absolute;
-          top: -40px; /* align vertically with buttons */
+          top: -60px; /* move slightly more upwards to align with buttons */
           right: 20%; /* roughly place in the middle between Brand button and right edge */
           display: flex;
           gap: 1.5rem;
