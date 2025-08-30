@@ -97,6 +97,40 @@ export default function ContactSection() {
     }
   }
 
+  // Sign out / revoke Google session and clear local state
+  function handleSignOut() {
+    try {
+      // Revoke the token for this email if available
+      if (googleUser?.email && window.google?.accounts?.id?.revoke) {
+        window.google.accounts.id.revoke(googleUser.email, () => {
+          // no-op; we'll clear local state below
+        });
+      }
+      // Disable auto select for one-tap (belt & suspenders)
+      if (window.google?.accounts?.id?.disableAutoSelect) {
+        window.google.accounts.id.disableAutoSelect();
+      }
+    } catch (e) {
+      // swallow any GIS errors; continue clearing local state
+    }
+
+    // Clear UI state
+    setGoogleUser(null);
+    setRole('');
+    setStatus(null);
+    setResponseMessage('');
+
+    // Reset any visible form (in case one is open)
+    const form = document.querySelector('#contact form');
+    if (form) {
+      try { form.reset(); } catch {}
+    }
+
+    // Also clear hidden role input if present
+    const roleField = document.querySelector('input[name="role"]');
+    if (roleField) roleField.value = '';
+  }
+
   // Submit (keeps your existing Formspree + optional reCAPTCHA pattern)
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -202,11 +236,14 @@ export default function ContactSection() {
                     <div ref={googleBtnRef} aria-label="Google Sign-In"></div>
 
                     {googleUser && (
-                      <div className="alert alert-success d-flex align-items-center gap-2 mt-2 mb-0 w-100">
-                        <iconify-icon icon="lucide:user-check" className="fs-5"></iconify-icon>
-                        <span>
-                          Signed in as <strong>{googleUser.name}</strong> ({googleUser.email}) — {role || 'Role not set'}
-                        </span>
+                      <div className="alert alert-success d-flex align-items-center justify-content-between mt-2 mb-0 w-100">
+                        <div className="d-flex align-items-center gap-2">
+                          <iconify-icon icon="lucide:user-check" className="fs-5"></iconify-icon>
+                          <span>
+                            Signed in as <strong>{googleUser.name}</strong> ({googleUser.email}) — {role || 'Role not set'}
+                          </span>
+                        </div>
+                        <button type="button" onClick={handleSignOut} className="btn btn-sm btn-outline-secondary">Sign out</button>
                       </div>
                     )}
                   </div>
