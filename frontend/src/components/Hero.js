@@ -113,11 +113,11 @@ export default function Hero() {
             </a>
 
             {/* Social logos row */}
-            <div className="d-flex gap-4 mt-4 align-items-center social-row">
-              <iconify-icon icon="ri:youtube-fill" class="fs-2 text-white social-icon" aria-label="YouTube" role="img"></iconify-icon>
-              <iconify-icon icon="simple-icons:youtubeshorts" class="fs-2 text-white social-icon" aria-label="YouTube Shorts" role="img"></iconify-icon>
-              <iconify-icon icon="ri:instagram-fill" class="fs-2 text-white social-icon" aria-label="Instagram" role="img"></iconify-icon>
-              <iconify-icon icon="ri:facebook-fill" class="fs-2 text-white social-icon" aria-label="Facebook" role="img"></iconify-icon>
+            <div className="d-flex justify-content-end gap-5 mt-4 align-items-center social-row">
+              <iconify-icon icon="ri:youtube-fill" class="fs-1 text-white social-icon" aria-label="YouTube" role="img"></iconify-icon>
+              <iconify-icon icon="simple-icons:youtubeshorts" class="fs-1 text-white social-icon" aria-label="YouTube Shorts" role="img"></iconify-icon>
+              <iconify-icon icon="ri:instagram-fill" class="fs-1 text-white social-icon" aria-label="Instagram" role="img"></iconify-icon>
+              <iconify-icon icon="ri:facebook-fill" class="fs-1 text-white social-icon" aria-label="Facebook" role="img"></iconify-icon>
             </div>
           </div>
         </div>
