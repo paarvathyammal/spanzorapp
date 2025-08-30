@@ -1,4 +1,16 @@
+import { useEffect } from 'react';
+
 export default function Hero() {
+  useEffect(() => {
+    if (!document.querySelector('script[data-iconify]')) {
+      const s = document.createElement('script');
+      s.src = 'https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js';
+      s.async = true;
+      s.setAttribute('data-iconify', 'true');
+      document.body.appendChild(s);
+    }
+  }, []);
+
   return (
     <section id="hero" className="banner-section position-relative d-flex align-items-end min-vh-100">
       <div
@@ -101,23 +113,31 @@ export default function Hero() {
             </a>
 
             {/* Social logos row */}
-            <div className="d-flex gap-4 mt-4 align-items-center">
-              <iconify-icon icon="mdi:youtube" className="fs-2 text-white social-icon"></iconify-icon>
-              <iconify-icon icon="mdi:youtube-shorts" className="fs-2 text-white social-icon"></iconify-icon>
-              <iconify-icon icon="mdi:instagram" className="fs-2 text-white social-icon"></iconify-icon>
-              <iconify-icon icon="mdi:facebook" className="fs-2 text-white social-icon"></iconify-icon>
+            <div className="d-flex gap-4 mt-4 align-items-center social-row">
+              <iconify-icon icon="ri:youtube-fill" class="fs-2 text-white social-icon" aria-label="YouTube" role="img"></iconify-icon>
+              <iconify-icon icon="simple-icons:youtubeshorts" class="fs-2 text-white social-icon" aria-label="YouTube Shorts" role="img"></iconify-icon>
+              <iconify-icon icon="ri:instagram-fill" class="fs-2 text-white social-icon" aria-label="Instagram" role="img"></iconify-icon>
+              <iconify-icon icon="ri:facebook-fill" class="fs-2 text-white social-icon" aria-label="Facebook" role="img"></iconify-icon>
             </div>
           </div>
         </div>
       </div>
+      <style>{`
+        .social-row .social-icon {
+          display: inline-block;
+          transform: translateZ(0);
+          transition: transform 200ms ease, filter 200ms ease;
+          will-change: transform;
+          cursor: default;
+        }
+        .social-row:hover .social-icon { transform: scale(1.08); }
+        .social-row .social-icon:hover { transform: scale(1.25); }
+        @media (prefers-reduced-motion: reduce) {
+          .social-row .social-icon,
+          .social-row:hover .social-icon,
+          .social-row .social-icon:hover { transition: none; transform: none; }
+        }
+      `}</style>
     </section>
   );
 }
-<style jsx>{`
-  .social-icon {
-    transition: transform 0.3s ease;
-  }
-  .social-icon:hover {
-    transform: scale(1.2);
-  }
-`}</style>
