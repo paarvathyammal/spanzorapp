@@ -3,11 +3,22 @@ export default function Navbar() {
     <>
       {/* Inline styles for navbar brand continuous animation */}
       <style>{`
-        .nav-brand{ display:inline-block; will-change: transform, text-shadow; }
-        .nav-brand-continuous{ animation: nav-float-const 6s ease-in-out infinite alternate, nav-glow-const 6s ease-in-out infinite; }
-        @keyframes nav-float-const{ from { transform: translateY(-1.5px) rotate(-2deg); } to { transform: translateY(1.5px) rotate(2deg); } }
-        @keyframes nav-glow-const{ 0%,100% { text-shadow: 0 0 0 rgba(166,255,71,0); } 50% { text-shadow: 0 0 10px rgba(166,255,71,0.35); } }
-        @media (hover:hover){ .nav-brand:hover{ text-shadow: 0 0 12px rgba(166,255,71,0.45); } }
+        .nav-brand{ display:inline-block; position:relative; }
+        .nav-brand-continuous::after{
+          content:"";
+          position:absolute;
+          bottom:-3px;
+          left:0;
+          width:100%;
+          height:2px;
+          background:linear-gradient(90deg,#60a5fa,#a6ff47);
+          background-size:200% auto;
+          animation:underline-sweep 6s linear infinite;
+        }
+        @keyframes underline-sweep{
+          0%{ background-position:0% center; }
+          100%{ background-position:200% center; }
+        }
       `}</style>
 
       <header className="header border-4 border-primary border-top position-fixed start-0 top-0 w-100" style={{ zIndex: 1000 }}>
