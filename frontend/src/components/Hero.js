@@ -99,9 +99,25 @@ export default function Hero() {
                 className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"
               ></iconify-icon>
             </a>
+
+            {/* Social logos row */}
+            <div className="d-flex gap-4 mt-4 align-items-center">
+              <iconify-icon icon="mdi:youtube" className="fs-2 text-white social-icon"></iconify-icon>
+              <iconify-icon icon="mdi:youtube-shorts" className="fs-2 text-white social-icon"></iconify-icon>
+              <iconify-icon icon="mdi:instagram" className="fs-2 text-white social-icon"></iconify-icon>
+              <iconify-icon icon="mdi:facebook" className="fs-2 text-white social-icon"></iconify-icon>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
+<style jsx>{`
+  .social-icon {
+    transition: transform 0.3s ease;
+  }
+  .social-icon:hover {
+    transform: scale(1.2);
+  }
+`}</style>
