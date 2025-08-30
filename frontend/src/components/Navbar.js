@@ -1,23 +1,26 @@
 export default function Navbar() {
   return (
     <>
-      {/* Inline styles for navbar brand continuous animation */}
+      {/* Inline styles for navbar brand reveal animation */}
       <style>{`
-        .nav-brand{ display:inline-block; position:relative; }
-        .nav-brand-continuous::after{
-          content:"";
-          position:absolute;
-          bottom:-3px;
-          left:0;
-          width:100%;
-          height:2px;
-          background:linear-gradient(90deg,#60a5fa,#a6ff47);
-          background-size:200% auto;
-          animation:underline-sweep 6s linear infinite;
+        .nav-brand{ display:inline-block; position:relative; color:#fff; }
+        /* Text reveal & disappear via animated mask sweep */
+        .nav-brand-reveal{
+          color:#fff; /* fallback for old browsers */
+          -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 20%, black 80%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, black 20%, black 80%, transparent 100%);
+          -webkit-mask-size: 200% 100%;
+          mask-size: 200% 100%;
+          -webkit-mask-position: 120% 0; /* start off to the right */
+          mask-position: 120% 0;
+          animation: logo-reveal 6s ease-in-out infinite;
         }
-        @keyframes underline-sweep{
-          0%{ background-position:0% center; }
-          100%{ background-position:200% center; }
+        @keyframes logo-reveal{
+          0%   { -webkit-mask-position: 120% 0; mask-position: 120% 0; opacity: .25; }
+          20%  { opacity: 1; }
+          50%  { -webkit-mask-position: 50% 0;  mask-position: 50% 0;  opacity: 1; }
+          80%  { opacity: 1; }
+          100% { -webkit-mask-position: -20% 0; mask-position: -20% 0; opacity: .25; }
         }
       `}</style>
 
@@ -26,8 +29,8 @@ export default function Navbar() {
           <div className="header-wrapper d-flex align-items-center justify-content-between">
             <div className="logo">
               <a href="#" className="logo-white d-flex align-items-center">
-                {/* Add continuous animation class here */}
-                <span className="spanzor-brand nav-brand nav-brand-continuous">Spanzor</span>
+                {/* Add reveal animation class here */}
+                <span className="spanzor-brand nav-brand nav-brand-reveal">Spanzor</span>
               </a>
             </div>
             <div className="d-flex align-items-center gap-4">
