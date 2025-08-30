@@ -3,24 +3,18 @@ export default function Navbar() {
     <>
       {/* Inline styles for navbar brand reveal animation */}
       <style>{`
-        .nav-brand{ display:inline-block; position:relative; color:#fff; }
-        /* Text reveal & disappear via animated mask sweep */
+        .nav-brand{ display:inline-block; position:relative; }
         .nav-brand-reveal{
-          color:#fff; /* fallback for old browsers */
-          -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 20%, black 80%, transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0%, black 20%, black 80%, transparent 100%);
-          -webkit-mask-size: 200% 100%;
-          mask-size: 200% 100%;
-          -webkit-mask-position: 120% 0; /* start off to the right */
-          mask-position: 120% 0;
-          animation: logo-reveal 6s ease-in-out infinite;
+          background: linear-gradient(270deg, #60a5fa, #a6ff47, #ffdd00);
+          background-size: 600% 600%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gradientShift 6s ease infinite;
         }
-        @keyframes logo-reveal{
-          0%   { -webkit-mask-position: 120% 0; mask-position: 120% 0; opacity: .25; }
-          20%  { opacity: 1; }
-          50%  { -webkit-mask-position: 50% 0;  mask-position: 50% 0;  opacity: 1; }
-          80%  { opacity: 1; }
-          100% { -webkit-mask-position: -20% 0; mask-position: -20% 0; opacity: .25; }
+        @keyframes gradientShift {
+          0%{ background-position:0% 50% }
+          50%{ background-position:100% 50% }
+          100%{ background-position:0% 50% }
         }
       `}</style>
 
