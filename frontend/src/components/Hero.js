@@ -113,11 +113,11 @@ export default function Hero() {
             </a>
 
             {/* Social logos row */}
-            <div className="d-flex justify-content-end gap-5 mt-4 align-items-center social-row">
-              <iconify-icon icon="ri:youtube-fill" class="fs-1 text-white social-icon" aria-label="YouTube" role="img"></iconify-icon>
-              <iconify-icon icon="simple-icons:youtubeshorts" class="fs-1 text-white social-icon" aria-label="YouTube Shorts" role="img"></iconify-icon>
-              <iconify-icon icon="ri:instagram-fill" class="fs-1 text-white social-icon" aria-label="Instagram" role="img"></iconify-icon>
-              <iconify-icon icon="ri:facebook-fill" class="fs-1 text-white social-icon" aria-label="Facebook" role="img"></iconify-icon>
+            <div className="d-flex justify-content-end mt-5 pe-4 social-row">
+              <iconify-icon icon="ri:youtube-fill" class="display-3 social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
+              <iconify-icon icon="simple-icons:youtubeshorts" class="display-3 social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
+              <iconify-icon icon="ri:instagram-fill" class="display-3 social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
+              <iconify-icon icon="ri:facebook-fill" class="display-3 social-icon" aria-label="Facebook" role="img"></iconify-icon>
             </div>
           </div>
         </div>
@@ -136,6 +136,13 @@ export default function Hero() {
           .social-row .social-icon,
           .social-row:hover .social-icon,
           .social-row .social-icon:hover { transition: none; transform: none; }
+        }
+        .social-row .social-icon {
+          font-size: 3rem !important; /* force bigger size */
+          color: inherit; /* use icon's default brand color */
+        }
+        @media (min-width: 992px) {
+          .social-row .social-icon { font-size: 4rem !important; }
         }
       `}</style>
     </section>
