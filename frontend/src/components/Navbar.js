@@ -4,6 +4,7 @@ export default function Navbar() {
       {/* Inline styles for navbar brand reveal animation */}
       <style>{`
         .nav-brand{ display:inline-block; position:relative; }
+        /* Morphing gradient text */
         .nav-brand-reveal{
           background: linear-gradient(270deg, #60a5fa, #a6ff47, #ffdd00);
           background-size: 600% 600%;
@@ -11,16 +12,26 @@ export default function Navbar() {
           -webkit-text-fill-color: transparent;
           animation: gradientShift 6s ease infinite;
         }
-        @keyframes gradientShift {
-          0%{ background-position:0% 50% }
-          50%{ background-position:100% 50% }
-          100%{ background-position:0% 50% }
+        @keyframes gradientShift { 0%{ background-position:0% 50% } 50%{ background-position:100% 50% } 100%{ background-position:0% 50% } }
+
+        /* Underline sweep */
+        .nav-brand-underline::after{
+          content:"";
+          position:absolute; bottom:-3px; left:0; width:100%; height:2px;
+          background: linear-gradient(90deg, #60a5fa, #a6ff47);
+          background-size: 200% auto;
+          animation: underline-sweep 6s linear infinite;
         }
-        .flip-letter {
-          display: inline-block;
+        @keyframes underline-sweep { 0%{ background-position:0% center } 100%{ background-position:200% center } }
+
+        /* Flip only the 'z' */
+        .flip-letter{
+          display:inline-block;
+          transform-style: preserve-3d;
+          backface-visibility: hidden;
           animation: flipZ 3s ease-in-out infinite;
         }
-        @keyframes flipZ {
+        @keyframes flipZ{
           0%, 80%, 100% { transform: rotateY(0deg); }
           40% { transform: rotateY(180deg); }
         }
@@ -32,7 +43,7 @@ export default function Navbar() {
             <div className="logo">
               <a href="#" className="logo-white d-flex align-items-center">
                 {/* Add reveal animation class here */}
-                <span className="spanzor-brand nav-brand nav-brand-reveal">
+                <span className="spanzor-brand nav-brand nav-brand-reveal nav-brand-underline">
                   Span<span className="flip-letter">z</span>or
                 </span>
               </a>
