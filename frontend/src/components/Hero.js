@@ -1,3 +1,4 @@
+import StripeFlow from './StripeFlow';
 export default function Hero() {
   return (
     <section id="hero" className="banner-section position-relative d-flex align-items-end min-vh-100">
@@ -28,6 +29,7 @@ export default function Hero() {
                   India's <span className="text-primary">next-generation</span> platform connecting
                   brands with creators to run powerful, measurable campaigns.
                 </p>
+                <StripeFlow />
               </div>
             </div>
           </div>
