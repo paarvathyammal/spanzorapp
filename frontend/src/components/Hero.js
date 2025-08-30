@@ -27,35 +27,17 @@ export default function Hero() {
             </a>
           </div>
           <div className="d-flex gap-3 flex-wrap mt-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-            {/* Button 1: Influencer → #contact */}
+            {/* Button 1: Influencer → #contact (kept layout/styles) */}
             <a href="#contact" className="btn">
               <span className="btn-text">I’m an Influencer</span>
               <iconify-icon icon="lucide:arrow-up-right" className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
             </a>
-            {/* Button 2: Brand → #packages */}
+            {/* Button 2: Brand → #packages (kept layout/styles) */}
             <a href="#packages" className="btn border border-white border-opacity-25">
               <span className="btn-text">I’m a Brand</span>
               <iconify-icon icon="lucide:arrow-up-right" className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
             </a>
           </div>
-
-          {/* Influencer attraction lines (animated) */}
-          <p
-            className="fs-4 fw-semibold text-white mt-3"
-            data-aos="fade-up"
-            data-aos-delay="400"
-            data-aos-duration="1000"
-          >
-            Influencers, unlock continuous brand collaborations 🚀
-          </p>
-          <p
-            className="fs-6 text-white text-opacity-75"
-            data-aos="fade-up"
-            data-aos-delay="600"
-            data-aos-duration="1000"
-          >
-            Join Spanzor to grow your reach, earn more, and build long-term partnerships.
-          </p>
         </div>
       </div>
     </section>
