@@ -204,21 +204,29 @@ export default function ContactSection() {
             <div className="col-xl-8">
               <div className="card bg-white" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 <div className="card-body p-7 p-xxl-8">
-                  {/* NEW: Two Google Sign-In buttons (Influencer + Brand) */}
-                  <div className="d-flex flex-column align-items-center gap-4 mb-6 pb-6 border-bottom">
-                    <h5 className="mb-2">Quick Sign-In</h5>
-                    <div className="d-flex gap-4">
-                      <div className="d-flex flex-column align-items-center">
-                        <div ref={influencerBtnRef} aria-label="Google Sign-In for Influencers"></div>
-                        <small className="text-muted mt-2">Sign in as <strong>Influencer</strong></small>
+                  {/* NEW: Two Google Sign-In buttons (Influencer + Brand), card-styled layout */}
+                  <div className="d-flex flex-column align-items-center gap-4 mb-6 pb-6 border-bottom w-100">
+                    <h5 className="mb-3">Quick Sign-In</h5>
+                    <div className="row w-100">
+                      <div className="col-md-6 mb-3 mb-md-0">
+                        <div className="card border h-100 shadow-sm">
+                          <div className="card-body d-flex flex-column align-items-center justify-content-center">
+                            <div ref={influencerBtnRef} aria-label="Google Sign-In for Influencers"></div>
+                            <p className="mt-2 mb-0 small text-muted">Continue as <strong>Influencer</strong></p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="d-flex flex-column align-items-center">
-                        <div ref={brandBtnRef} aria-label="Google Sign-In for Brands"></div>
-                        <small className="text-muted mt-2">Sign in as <strong>Brand</strong></small>
+                      <div className="col-md-6">
+                        <div className="card border h-100 shadow-sm">
+                          <div className="card-body d-flex flex-column align-items-center justify-content-center">
+                            <div ref={brandBtnRef} aria-label="Google Sign-In for Brands"></div>
+                            <p className="mt-2 mb-0 small text-muted">Continue as <strong>Brand</strong></p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     {googleUser && (
-                      <div className="alert alert-success d-flex align-items-center gap-2 mb-0">
+                      <div className="alert alert-success d-flex align-items-center gap-2 mt-3 mb-0 w-100">
                         <iconify-icon icon="lucide:user-check" className="fs-5"></iconify-icon>
                         <span>
                           Signed in as <strong>{googleUser.name}</strong> ({googleUser.email}) — {role || 'Role not set'}
