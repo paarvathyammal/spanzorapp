@@ -114,7 +114,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="mt-3 d-flex justify-content-end pe-4 social-row"
+            className="d-flex align-items-center justify-content-end pe-4 social-row"
             data-aos="fade-up"
             data-aos-delay="420"
             data-aos-duration="900"
@@ -135,8 +135,11 @@ export default function Hero() {
           will-change: transform;
           cursor: default;
           font-size: 3rem !important; /* base size */
-          color: inherit; /* brand color from icon */
         }
+        .social-row .social-icon[icon="ri:youtube-fill"] { color: #FF0000; }
+        .social-row .social-icon[icon="simple-icons:youtubeshorts"] { color: #FF0000; }
+        .social-row .social-icon[icon="ri:instagram-fill"] { color: #E1306C; }
+        .social-row .social-icon[icon="ri:facebook-fill"] { color: #1877F2; }
         @media (min-width: 992px) {
           .social-row .social-icon { font-size: 4rem !important; }
         }
