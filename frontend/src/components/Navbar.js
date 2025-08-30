@@ -1,55 +1,12 @@
-import { useEffect, useRef } from 'react';
-
 export default function Navbar() {
-  const brandRef = useRef(null);
-
-  useEffect(() => {
-    const el = brandRef.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.classList.add('nav-logo-in-view');
-          } else {
-            el.classList.remove('nav-logo-in-view');
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const y = window.scrollY || 0;
-        const rot = (y * 0.05) % 4; // max ~4deg
-        const bob = Math.sin(y * 0.01) * 1.5; // ±1.5px
-        el.style.setProperty('--nav-rot', `${rot}deg`);
-        el.style.setProperty('--nav-bob', `${bob}px`);
-      });
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    return () => {
-      obs.disconnect();
-      window.removeEventListener('scroll', onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-
   return (
     <>
-      {/* Inline styles for navbar brand animation */}
+      {/* Inline styles for navbar brand continuous animation */}
       <style>{`
-        .nav-brand{ display:inline-block; will-change: transform, text-shadow; transform: translateY(var(--nav-bob, 0)) rotate(var(--nav-rot, 0)); transition: text-shadow 200ms ease; }
-        .nav-logo-in-view{ animation: nav-float 7s ease-in-out infinite alternate, nav-glow 3.4s ease-in-out infinite; }
-        @keyframes nav-float{ from { transform: translateY(calc(var(--nav-bob, 0) - 1.5px)) rotate(var(--nav-rot, 0)); } to { transform: translateY(calc(var(--nav-bob, 0) + 1.5px)) rotate(var(--nav-rot, 0)); } }
-        @keyframes nav-glow{ 0%,100% { text-shadow: 0 0 0 rgba(166,255,71,0); } 50% { text-shadow: 0 0 10px rgba(166,255,71,0.35); } }
+        .nav-brand{ display:inline-block; will-change: transform, text-shadow; }
+        .nav-brand-continuous{ animation: nav-float-const 6s ease-in-out infinite alternate, nav-glow-const 6s ease-in-out infinite; }
+        @keyframes nav-float-const{ from { transform: translateY(-1.5px) rotate(-2deg); } to { transform: translateY(1.5px) rotate(2deg); } }
+        @keyframes nav-glow-const{ 0%,100% { text-shadow: 0 0 0 rgba(166,255,71,0); } 50% { text-shadow: 0 0 10px rgba(166,255,71,0.35); } }
         @media (hover:hover){ .nav-brand:hover{ text-shadow: 0 0 12px rgba(166,255,71,0.45); } }
       `}</style>
 
@@ -58,7 +15,8 @@ export default function Navbar() {
           <div className="header-wrapper d-flex align-items-center justify-content-between">
             <div className="logo">
               <a href="#" className="logo-white d-flex align-items-center">
-                <span ref={brandRef} className="spanzor-brand nav-brand">Spanzor</span>
+                {/* Add continuous animation class here */}
+                <span className="spanzor-brand nav-brand nav-brand-continuous">Spanzor</span>
               </a>
             </div>
             <div className="d-flex align-items-center gap-4">
