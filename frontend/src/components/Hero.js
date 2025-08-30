@@ -100,26 +100,6 @@ export default function Hero() {
               ></iconify-icon>
             </a>
           </div>
-
-          {/* Influencer attraction lines (premium style) */}
-          <div
-            className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary bg-opacity-10 border border-primary mt-4"
-            data-aos="fade-up"
-            data-aos-delay="400"
-            data-aos-duration="1000"
-          >
-            <iconify-icon icon="lucide:stars" className="text-primary fs-6"></iconify-icon>
-            <span className="fw-semibold text-primary">Influencers Wanted</span>
-          </div>
-
-          <p
-            className="fs-5 text-white text-opacity-75 mt-2"
-            data-aos="fade-up"
-            data-aos-delay="600"
-            data-aos-duration="1000"
-          >
-            Unlock consistent brand deals, grow your reach, and earn more 🚀
-          </p>
         </div>
       </div>
     </section>
