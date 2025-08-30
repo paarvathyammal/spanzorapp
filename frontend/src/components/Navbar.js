@@ -16,6 +16,14 @@ export default function Navbar() {
           50%{ background-position:100% 50% }
           100%{ background-position:0% 50% }
         }
+        .flip-letter {
+          display: inline-block;
+          animation: flipZ 3s ease-in-out infinite;
+        }
+        @keyframes flipZ {
+          0%, 80%, 100% { transform: rotateY(0deg); }
+          40% { transform: rotateY(180deg); }
+        }
       `}</style>
 
       <header className="header border-4 border-primary border-top position-fixed start-0 top-0 w-100" style={{ zIndex: 1000 }}>
@@ -24,7 +32,9 @@ export default function Navbar() {
             <div className="logo">
               <a href="#" className="logo-white d-flex align-items-center">
                 {/* Add reveal animation class here */}
-                <span className="spanzor-brand nav-brand nav-brand-reveal">Spanzor</span>
+                <span className="spanzor-brand nav-brand nav-brand-reveal">
+                  Span<span className="flip-letter">z</span>or
+                </span>
               </a>
             </div>
             <div className="d-flex align-items-center gap-4">
