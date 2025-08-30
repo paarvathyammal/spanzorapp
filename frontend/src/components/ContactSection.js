@@ -207,9 +207,15 @@ export default function ContactSection() {
                   {/* NEW: Two Google Sign-In buttons (Influencer + Brand) */}
                   <div className="d-flex flex-column align-items-center gap-4 mb-6 pb-6 border-bottom">
                     <h5 className="mb-2">Quick Sign-In</h5>
-                    <div className="d-flex gap-3">
-                      <div ref={influencerBtnRef} aria-label="Google Sign-In for Influencers"></div>
-                      <div ref={brandBtnRef} aria-label="Google Sign-In for Brands"></div>
+                    <div className="d-flex gap-4">
+                      <div className="d-flex flex-column align-items-center">
+                        <div ref={influencerBtnRef} aria-label="Google Sign-In for Influencers"></div>
+                        <small className="text-muted mt-2">Sign in as <strong>Influencer</strong></small>
+                      </div>
+                      <div className="d-flex flex-column align-items-center">
+                        <div ref={brandBtnRef} aria-label="Google Sign-In for Brands"></div>
+                        <small className="text-muted mt-2">Sign in as <strong>Brand</strong></small>
+                      </div>
                     </div>
                     {googleUser && (
                       <div className="alert alert-success d-flex align-items-center gap-2 mb-0">
@@ -418,7 +424,7 @@ export default function ContactSection() {
                   </form>
                   {responseMessage && (
                     <div className={`mt-3 alert ${status === 'success' ? 'alert-success' : 'alert-danger'} d-flex align-items-center gap-2 mb-0`}>
-                      <iconify-icon icon={status === 'success' ? 'lucide:check-circle' : 'lucide:alert-circle'} class="fs-5"></iconify-icon>
+                      <iconify-icon icon={status === 'success' ? 'lucide:check-circle' : 'lucide:alert-circle'} className="fs-5"></iconify-icon>
                       <span>{responseMessage}</span>
                     </div>
                   )}
