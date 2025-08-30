@@ -72,7 +72,7 @@ body {
   to { transform: scale(15); opacity: 0; }
 }
 
-/* Triggered on active (mousedown) and positioned via CSS vars from onClick */
+/* Triggered on active (mousedown) and positioned via CSS vars set in onClick */
 .btn-animate:active::after {
   left: var(--ripple-x, 50%);
   top: var(--ripple-y, 50%);
