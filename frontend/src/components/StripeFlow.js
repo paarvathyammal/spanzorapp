@@ -1,7 +1,43 @@
 // StripeFlow.js
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function StripeFlow() {
+  const containerRef = useRef(null);
+  const discoveryRef = useRef(null);
+  const oppRef = useRef(null);
+  const payRef = useRef(null);
+  const [paths, setPaths] = useState({ p1: '', p2: '' });
+
+  useEffect(() => {
+    function center(el) {
+      if (!el || !containerRef.current) return null;
+      const cb = containerRef.current.getBoundingClientRect();
+      const b = el.getBoundingClientRect();
+      return { x: b.left - cb.left + b.width / 2, y: b.top - cb.top + b.height / 2 };
+    }
+    function makeCubic(a, b) {
+      if (!a || !b) return '';
+      const dx = (b.x - a.x) * 0.5;
+      const c1 = `${a.x + dx},${a.y}`;
+      const c2 = `${b.x - dx},${b.y}`;
+      return `M ${a.x},${a.y} C ${c1} ${c2} ${b.x},${b.y}`;
+    }
+    function compute() {
+      const A = center(discoveryRef.current);
+      const B = center(oppRef.current);
+      const C = center(payRef.current);
+      setPaths({ p1: makeCubic(A, B), p2: makeCubic(B, C) });
+    }
+    compute();
+    const ro = new ResizeObserver(compute);
+    if (containerRef.current) ro.observe(containerRef.current);
+    window.addEventListener('resize', compute);
+    return () => {
+      window.removeEventListener('resize', compute);
+      ro.disconnect();
+    };
+  }, []);
+
   return (
     <div className="stripeflow-wrap">
       <style>{`
@@ -70,7 +106,7 @@ export default function StripeFlow() {
         .sf-icon svg{ width:22px;height:22px; opacity:.95 }
 
         /* animated connector lines */
-        .sf-connector{ position:absolute; inset:0; pointer-events:none; }
+        .sf-connector{ position:absolute; inset:0; pointer-events:none; z-index:1; }
         .sf-connector svg{ width:100%; height:100%; }
         .wire{
           stroke:url(#wireGrad); stroke-width:3; fill:none;
@@ -90,14 +126,24 @@ export default function StripeFlow() {
           filter: blur(28px);
           z-index:0;
         }
+
+        /* staggered fade-in for highlighted cards */
+        .sf-appear{ opacity:0; transform: translateY(12px); animation: sfFadeUp .8s ease forwards; }
+        .sf-appear.delay-1{ animation-delay: .05s; }
+        .sf-appear.delay-2{ animation-delay: .25s; }
+        .sf-appear.delay-3{ animation-delay: .45s; }
+        @keyframes sfFadeUp{ to { opacity:1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce){
+          .sf-appear{ opacity:1; transform:none; animation:none; }
+        }
       `}</style>
 
       <div className="sf-glow" />
 
-      <div className="stripeflow-grid">
+      <div className="stripeflow-grid" ref={containerRef}>
         {/* ===== Row 1 ===== */}
         {/* Discovery (Brands) — Highlight LEFT */}
-        <div className="sf-card elevated" style={{gridColumn:'1 / span 2'}}>
+        <div ref={discoveryRef} className="sf-card elevated sf-appear delay-1" style={{gridColumn:'1 / span 2'}}>
           <span className="sf-pill">Brands</span>
           <div className="sf-icon">
             {/* Search/graph icon */}
@@ -114,7 +160,7 @@ export default function StripeFlow() {
         <div className="sf-card dim" />
 
         {/* Opportunities (Influencers) — Highlight RIGHT */}
-        <div className="sf-card elevated" style={{gridColumn:'5 / span 2'}}>
+        <div ref={oppRef} className="sf-card elevated sf-appear delay-2" style={{gridColumn:'5 / span 2'}}>
           <span className="sf-pill">Influencers</span>
           <div className="sf-icon">
             {/* Spark/opportunity icon */}
@@ -138,7 +184,7 @@ export default function StripeFlow() {
         {/* ===== Row 3 ===== */}
         <div className="sf-card dim" />
         {/* Secure Payments — Highlight CENTER/BOTTOM */}
-        <div className="sf-card elevated" style={{gridColumn:'2 / span 2'}}>
+        <div ref={payRef} className="sf-card elevated sf-appear delay-3" style={{gridColumn:'2 / span 2'}}>
           <span className="sf-pill">Platform</span>
           <div className="sf-icon">
             {/* shield/credit icon */}
@@ -162,13 +208,10 @@ export default function StripeFlow() {
               <stop offset="100%" stopColor="var(--lineB)"/>
             </linearGradient>
           </defs>
-          {/* Discovery (left) to Opportunities (right) */}
-          <path className="wire" d="M 20% 18% C 36% 18%, 46% 18%, 78% 18%" />
-          {/* Opportunities (right) down to Secure Payments (bottom center) */}
-          <path className="wire" d="M 78% 18% C 70% 30%, 55% 40%, 38% 52%" />
+          {paths.p1 && <path className="wire" d={paths.p1} />}
+          {paths.p2 && <path className="wire" d={paths.p2} />}
         </svg>
       </div>
     </div>
   );
 }
-
