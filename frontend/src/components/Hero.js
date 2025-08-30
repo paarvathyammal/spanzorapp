@@ -137,17 +137,14 @@ export default function Hero() {
           will-change: transform;
           cursor: default;
           font-size: 3rem !important; /* base size */
+          color: #FFFFFF;
         }
-        .social-row .social-icon[icon="ri:youtube-fill"] { color: #FF0000; }
-        .social-row .social-icon[icon="simple-icons:youtubeshorts"] { color: #FF0000; }
-        .social-row .social-icon[icon="ri:instagram-fill"] { color: #E1306C; }
-        .social-row .social-icon[icon="ri:facebook-fill"] { color: #1877F2; }
         .social-icons-wrapper {
           position: absolute;
           top: -60px; /* move slightly more upwards to align with buttons */
           right: 20%; /* roughly place in the middle between Brand button and right edge */
           display: flex;
-          gap: 1.5rem;
+          gap: 0.75rem;
         }
         @media (min-width: 992px) {
           .social-row .social-icon { font-size: 4rem !important; }
