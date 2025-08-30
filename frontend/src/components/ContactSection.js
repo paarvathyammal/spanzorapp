@@ -142,62 +142,71 @@ export default function ContactSection() {
     } catch {}
   }
 
-  // Submit to Formspree only
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
+ // Submit to Formspree only
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const form = e.target;
 
-    try {
-      await new Promise((resolve, reject) => {
-        if (!window.grecaptcha) return resolve();
-        window.grecaptcha.ready(() => {
-          window.grecaptcha
-            .execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'submit' })
-            .then((token) => {
-              const hidden = document.createElement('input');
-              hidden.type = 'hidden';
-              hidden.name = 'g-recaptcha-response';
-              hidden.value = token;
-              form.appendChild(hidden);
-              resolve();
-            })
-            .catch(reject);
-        });
+  try {
+    // Optional reCAPTCHA v3
+    await new Promise((resolve, reject) => {
+      if (!window.grecaptcha) return resolve();
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(process.env.REACT_APP_RECAPTCHA_SITE_KEY, { action: 'submit' })
+          .then((token) => {
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'g-recaptcha-response';
+            hidden.value = token;
+            form.appendChild(hidden);
+            resolve();
+          })
+          .catch(reject);
       });
+    });
 
-      const formData = new FormData(form);
-      if (!formData.get('role')) formData.set('role', role || '');
-      if (!formData.get('submittedAt')) formData.set('submittedAt', new Date().toISOString());
+    const formData = new FormData(form);
+    if (!formData.get('role')) formData.set('role', role || '');
+    if (!formData.get('submittedAt')) formData.set('submittedAt', new Date().toISOString());
 
-      const formspreeURL = process.env.REACT_APP_FORMSPREE_ENDPOINT;
-      if (!formspreeURL) {
-        setStatus('error');
-        setResponseMessage('❌ Missing REACT_APP_FORMSPREE_ENDPOINT.');
-        return;
-      }
-
-      const res = await fetch(formspreeURL, {
-        method: 'POST',
-        body: formData,
-        headers: { Accept: 'application/json' },
-      });
-
-      if (res.ok) {
-        setStatus('success');
-        setResponseMessage('✅ Submitted successfully. We will contact you within 24 hours.');
-        form.reset();
-        setGoogleUser(null);
-        setRole('');
-      } else {
-        setStatus('error');
-        setResponseMessage('❌ Submission failed. Please try again.');
-      }
-    } catch (err) {
+    const formspreeURL = process.env.REACT_APP_FORMSPREE_ENDPOINT;
+    if (!formspreeURL) {
       setStatus('error');
-      setResponseMessage('❌ An unexpected error occurred. Please try again later.');
+      setResponseMessage('❌ Missing REACT_APP_FORMSPREE_ENDPOINT.');
+      return;
     }
-  };
 
+    const res = await fetch(formspreeURL, {
+      method: 'POST',
+      body: formData,
+      headers: { Accept: 'application/json' },
+    });
+
+    if (res.ok) {
+      setStatus('success');
+      setResponseMessage('✅ Submitted successfully. We will contact you within 24 hours.');
+
+      // Google Analytics: lead submit event
+      try {
+        window.gtag && window.gtag('event', 'lead_submit', {
+          role: role || 'unknown',
+          method: 'formspree',
+        });
+      } catch {}
+
+      form.reset();
+      setGoogleUser(null);
+      setRole('');
+    } else {
+      setStatus('error');
+      setResponseMessage('❌ Submission failed. Please try again.');
+    }
+  } catch (err) {
+    setStatus('error');
+    setResponseMessage('❌ An unexpected error occurred. Please try again later.');
+  }
+};
   return (
     <section id="contact" className="py-5 py-lg-11 py-xl-12 bg-dark">
       <div className="container">
