@@ -235,201 +235,23 @@ export default function ContactSection() {
                     )}
                   </div>
 
-                  {/* FULL FORM (unchanged) */}
-                  <form onSubmit={handleSubmit}>
-                    {/* NEW: role included in submission */}
-                    <input type="hidden" name="role" value={role} />
+                  {/* ROLE-SPECIFIC FORMS */}
+                  {role === 'Influencer' && (
+                    <InfluencerForm onSubmit={handleSubmit} cityInputRef={cityInputRef} role={role} />
+                  )}
 
-                    <div className="row g-4 mb-4">
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Your Name *</label>
-                        <input
-                          className="form-control form-control-lg border rounded-3"
-                          name="name"
-                          placeholder="Enter your full name"
-                          required
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Email Address *</label>
-                        <input
-                          className="form-control form-control-lg border rounded-3"
-                          name="email"
-                          type="email"
-                          placeholder="your.email@company.com"
-                          required
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        />
-                      </div>
+                  {role === 'Brand' && (
+                    <BrandForm onSubmit={handleSubmit} cityInputRef={cityInputRef} role={role} />
+                  )}
+
+                  {!role && (
+                    <div className="alert alert-info d-flex align-items-center gap-2 mb-0">
+                      <iconify-icon icon="lucide:info" className="fs-5"></iconify-icon>
+                      <span>Please choose a role above — Continue with Google as <strong>Influencer</strong> or <strong>Brand</strong> to view the form.</span>
                     </div>
+                  )}
 
-                    <div className="row g-4 mb-4">
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Company</label>
-                        <input
-                          className="form-control form-control-lg border rounded-3"
-                          name="company"
-                          placeholder="Your company name"
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Phone</label>
-                        <input
-                          className="form-control form-control-lg border rounded-3"
-                          name="phone"
-                          placeholder="10-digit mobile number"
-                          pattern="^[0-9]{10}$"
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="row g-4 mb-4">
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">City</label>
-                        <input
-                          className="form-control form-control-lg border rounded-3"
-                          name="city"
-                          placeholder="Select your city"
-                          ref={cityInputRef}
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">State *</label>
-                        <select
-                          className="form-select form-select-lg border rounded-3"
-                          name="state"
-                          required
-                          defaultValue=""
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        >
-                          <option value="" disabled>
-                            Select State
-                          </option>
-                          <option>Tamil Nadu</option>
-                          <option>Kerala</option>
-                          <option>Karnataka</option>
-                          <option>Andhra Pradesh</option>
-                          <option>Telangana</option>
-                          <option>Maharashtra</option>
-                          <option>Delhi</option>
-                          <option>Gujarat</option>
-                          <option>West Bengal</option>
-                          <option>Other</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="row g-4 mb-4">
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Industry Vertical *</label>
-                        <select
-                          className="form-select form-select-lg border rounded-3"
-                          name="vertical"
-                          required
-                          defaultValue=""
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        >
-                          <option value="" disabled>
-                            Select Industry
-                          </option>
-                          <option>Food & Beverage</option>
-                          <option>Travel & Tourism</option>
-                          <option>Beauty & Cosmetics</option>
-                          <option>Technology</option>
-                          <option>Fashion & Lifestyle</option>
-                          <option>Healthcare</option>
-                          <option>Education</option>
-                          <option>Finance</option>
-                          <option>Other</option>
-                        </select>
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Campaign Budget *</label>
-                        <select
-                          className="form-select form-select-lg border rounded-3"
-                          name="budget"
-                          required
-                          defaultValue=""
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        >
-                          <option value="" disabled>
-                            Select Budget Range
-                          </option>
-                          <option>₹10,000 – ₹50,000</option>
-                          <option>₹50,000 – ₹2,00,000</option>
-                          <option>₹2,00,000 – ₹5,00,000</option>
-                          <option>₹5,00,000 – ₹15,00,000</option>
-                          <option>₹15,00,000 – ₹25,00,000</option>
-                          <option>₹25,00,000+</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="row g-4 mb-4">
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Expected Deliverables</label>
-                        <input
-                          className="form-control form-control-lg border rounded-3"
-                          name="deliverables"
-                          placeholder="e.g., 2 Reels, 1 Post, Story mentions"
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Preferred Platforms</label>
-                        <input
-                          className="form-control form-control-lg border rounded-3"
-                          name="platforms"
-                          placeholder="Instagram, YouTube, Twitter, etc."
-                          style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mb-6">
-                      <label className="form-label fw-semibold">Campaign Brief</label>
-                      <textarea
-                        className="form-control form-control-lg border rounded-3"
-                        name="message"
-                        placeholder="Tell us about your brand, campaign goals, target audience, and any specific requirements..."
-                        rows="4"
-                        style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}
-                      ></textarea>
-                    </div>
-
-                    {/* Honeypot for spam protection */}
-                    <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
-
-                    <button className="btn btn-lg w-100 justify-content-center" type="submit">
-                      <span className="btn-text">Submit Campaign Brief</span>
-                      <iconify-icon
-                        icon="lucide:arrow-up-right"
-                        className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"
-                      ></iconify-icon>
-                    </button>
-
-                    {status === 'success' && (
-                      <div className="alert alert-success d-flex align-items-center gap-3 mt-4 mb-0">
-                        <iconify-icon icon="lucide:check-circle" className="fs-5"></iconify-icon>
-                        <div>
-                          <strong>Thank you!</strong> We've received your campaign brief and will get back to you within 24 hours.
-                        </div>
-                      </div>
-                    )}
-
-                    {status === 'error' && (
-                      <div className="alert alert-danger d-flex align-items-center gap-3 mt-4 mb-0">
-                        <iconify-icon icon="lucide:alert-circle" className="fs-5"></iconify-icon>
-                        <div>
-                          <strong>Oops!</strong> Something went wrong. Please try again or contact us directly.
-                        </div>
-                      </div>
-                    )}
-                  </form>
+                  {/* shared submit feedback (auto-hides) */}
                   {responseMessage && (
                     <div className={`mt-3 alert ${status === 'success' ? 'alert-success' : 'alert-danger'} d-flex align-items-center gap-2 mb-0`}>
                       <iconify-icon icon={status === 'success' ? 'lucide:check-circle' : 'lucide:alert-circle'} className="fs-5"></iconify-icon>
@@ -444,5 +266,213 @@ export default function ContactSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+// =====================
+// Influencer Form
+// =====================
+function InfluencerForm({ onSubmit, cityInputRef, role }) {
+  return (
+    <form onSubmit={onSubmit}>
+      <input type="hidden" name="role" value={role || 'Influencer'} />
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Creator Name *</label>
+          <input className="form-control form-control-lg border rounded-3" name="name" placeholder="Your full name" required style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Email Address *</label>
+          <input className="form-control form-control-lg border rounded-3" name="email" type="email" placeholder="you@example.com" required style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Mobile / WhatsApp</label>
+          <input className="form-control form-control-lg border rounded-3" name="phone" placeholder="10-digit mobile number" pattern="^[0-9]{10}$" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">City</label>
+          <input className="form-control form-control-lg border rounded-3" name="city" placeholder="Select your city" ref={cityInputRef} style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Primary Category *</label>
+          <select className="form-select form-select-lg border rounded-3" name="category" required defaultValue="" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}>
+            <option value="" disabled>Select Category</option>
+            <option>Food & Beverage</option>
+            <option>Travel & Tourism</option>
+            <option>Beauty & Cosmetics</option>
+            <option>Technology</option>
+            <option>Fashion & Lifestyle</option>
+            <option>Education</option>
+            <option>Gaming</option>
+            <option>Fitness & Sports</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Preferred Platforms</label>
+          <input className="form-control form-control-lg border rounded-3" name="platforms" placeholder="Instagram, YouTube, etc." style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-4">
+          <label className="form-label fw-semibold">Followers</label>
+          <input className="form-control form-control-lg border rounded-3" name="followers" type="number" min="0" placeholder="e.g., 32000" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-4">
+          <label className="form-label fw-semibold">Rate – Reel (₹)</label>
+          <input className="form-control form-control-lg border rounded-3" name="rateReel" type="number" min="0" step="100" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-4">
+          <label className="form-label fw-semibold">Rate – Story (₹)</label>
+          <input className="form-control form-control-lg border rounded-3" name="rateStory" type="number" min="0" step="100" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Portfolio / Profile URL</label>
+          <input className="form-control form-control-lg border rounded-3" name="url" type="url" placeholder="https://instagram.com/username" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Consent to Share Contact</label>
+          <select className="form-select form-select-lg border rounded-3" name="consent" defaultValue="" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}>
+            <option value="" disabled>Select</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <label className="form-label fw-semibold">Notes</label>
+        <textarea className="form-control form-control-lg border rounded-3" name="notes" placeholder="Any special requirements, past collabs, etc." rows="4" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}></textarea>
+      </div>
+
+      {/* Honeypot for spam protection */}
+      <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
+
+      <button className="btn btn-lg w-100 justify-content-center" type="submit">
+        <span className="btn-text">Submit Influencer Profile</span>
+        <iconify-icon icon="lucide:arrow-up-right" className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+      </button>
+    </form>
+  );
+}
+
+// =====================
+// Brand Form
+// =====================
+function BrandForm({ onSubmit, cityInputRef, role }) {
+  return (
+    <form onSubmit={onSubmit}>
+      <input type="hidden" name="role" value={role || 'Brand'} />
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Company Name *</label>
+          <input className="form-control form-control-lg border rounded-3" name="company" placeholder="Your company name" required style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Contact Person *</label>
+          <input className="form-control form-control-lg border rounded-3" name="name" placeholder="Your full name" required style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Work Email *</label>
+          <input className="form-control form-control-lg border rounded-3" name="email" type="email" placeholder="you@company.com" required style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Phone</label>
+          <input className="form-control form-control-lg border rounded-3" name="phone" placeholder="10-digit mobile number" pattern="^[0-9]{10}$" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">City</label>
+          <input className="form-control form-control-lg border rounded-3" name="city" placeholder="Select your city" ref={cityInputRef} style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">State *</label>
+          <select className="form-select form-select-lg border rounded-3" name="state" required defaultValue="" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}>
+            <option value="" disabled>Select State</option>
+            <option>Tamil Nadu</option>
+            <option>Kerala</option>
+            <option>Karnataka</option>
+            <option>Andhra Pradesh</option>
+            <option>Telangana</option>
+            <option>Maharashtra</option>
+            <option>Delhi</option>
+            <option>Gujarat</option>
+            <option>West Bengal</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Industry Vertical *</label>
+          <select className="form-select form-select-lg border rounded-3" name="vertical" required defaultValue="" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}>
+            <option value="" disabled>Select Industry</option>
+            <option>Food & Beverage</option>
+            <option>Travel & Tourism</option>
+            <option>Beauty & Cosmetics</option>
+            <option>Technology</option>
+            <option>Fashion & Lifestyle</option>
+            <option>Healthcare</option>
+            <option>Education</option>
+            <option>Finance</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Campaign Budget *</label>
+          <select className="form-select form-select-lg border rounded-3" name="budget" required defaultValue="" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}>
+            <option value="" disabled>Select Budget Range</option>
+            <option>₹10,000 – ₹50,000</option>
+            <option>₹50,000 – ₹2,00,000</option>
+            <option>₹2,00,000 – ₹5,00,000</option>
+            <option>₹5,00,000 – ₹15,00,000</option>
+            <option>₹15,00,000 – ₹25,00,000</option>
+            <option>₹25,00,000+</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="row g-4 mb-4">
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Expected Deliverables</label>
+          <input className="form-control form-control-lg border rounded-3" name="deliverables" placeholder="e.g., 2 Reels, 1 Post, Story mentions" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-semibold">Preferred Platforms</label>
+          <input className="form-control form-control-lg border rounded-3" name="platforms" placeholder="Instagram, YouTube, Twitter, etc." style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }} />
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <label className="form-label fw-semibold">Campaign Brief</label>
+        <textarea className="form-control form-control-lg border rounded-3" name="message" placeholder="Tell us about your brand, campaign goals, target audience, and any specific requirements..." rows="4" style={{ padding: '14px 16px', border: '1px solid #e5e7eb' }}></textarea>
+      </div>
+
+      {/* Honeypot for spam protection */}
+      <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
+
+      <button className="btn btn-lg w-100 justify-content-center" type="submit">
+        <span className="btn-text">Submit Campaign Brief</span>
+        <iconify-icon icon="lucide:arrow-up-right" className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+      </button>
+    </form>
   );
 }
