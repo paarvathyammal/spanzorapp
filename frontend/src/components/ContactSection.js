@@ -17,9 +17,10 @@ export default function ContactSection() {
 
   const cityInputRef = useRef(null);
 
-  // NEW: two separate GIS button refs
-  const influencerBtnRef = useRef(null);
-  const brandBtnRef = useRef(null);
+  // NEW: single GIS button ref + live role ref
+  const googleBtnRef = useRef(null);
+  const roleRef = useRef('');
+  useEffect(() => { roleRef.current = role; }, [role]);
 
   // Load Google Maps Places Autocomplete (unchanged)
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function ContactSection() {
     }
   }, []);
 
-  // Load Google Identity Services and render TWO buttons (Influencer + Brand)
+  // Load Google Identity Services and render ONE button (role chosen via chips)
   useEffect(() => {
     const existing = document.querySelector('script[data-gis]');
     if (!existing) {
@@ -51,39 +52,21 @@ export default function ContactSection() {
       s.defer = true;
       s.setAttribute('data-gis', 'true');
       document.body.appendChild(s);
-      s.onload = renderGISButtons;
+      s.onload = renderGISButton;
     } else {
-      renderGISButtons();
+      renderGISButton();
     }
 
-    function renderGISButtons() {
+    function renderGISButton() {
       if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
-
       const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-
-      // Render Influencer button with its own callback
-      if (influencerBtnRef.current) {
+      if (googleBtnRef.current && !googleBtnRef.current.hasChildNodes()) {
         window.google.accounts.id.initialize({
           client_id: clientId,
-          callback: (response) => handleGoogleCredential(response, 'Influencer'),
+          callback: (response) => handleGoogleCredential(response, roleRef.current || ''),
         });
-        window.google.accounts.id.renderButton(influencerBtnRef.current, {
+        window.google.accounts.id.renderButton(googleBtnRef.current, {
           theme: 'filled_blue',
-          size: 'large',
-          shape: 'pill',
-          text: 'continue_with',
-          logo_alignment: 'left',
-        });
-      }
-
-      // Render Brand button with its own callback
-      if (brandBtnRef.current) {
-        window.google.accounts.id.initialize({
-          client_id: clientId,
-          callback: (response) => handleGoogleCredential(response, 'Brand'),
-        });
-        window.google.accounts.id.renderButton(brandBtnRef.current, {
-          theme: 'outline',
           size: 'large',
           shape: 'pill',
           text: 'continue_with',
@@ -204,29 +187,22 @@ export default function ContactSection() {
             <div className="col-xl-8">
               <div className="card bg-white" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 <div className="card-body p-7 p-xxl-8">
-                  {/* NEW: Two Google Sign-In buttons (Influencer + Brand), card-styled layout */}
-                  <div className="d-flex flex-column align-items-center gap-4 mb-6 pb-6 border-bottom w-100">
-                    <h5 className="mb-3">Quick Sign-In</h5>
-                    <div className="row w-100">
-                      <div className="col-md-6 mb-3 mb-md-0">
-                        <div className="card border h-100 shadow-sm">
-                          <div className="card-body d-flex flex-column align-items-center justify-content-center">
-                            <div ref={influencerBtnRef} aria-label="Google Sign-In for Influencers"></div>
-                            <p className="mt-2 mb-0 small text-muted">Continue as <strong>Influencer</strong></p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="card border h-100 shadow-sm">
-                          <div className="card-body d-flex flex-column align-items-center justify-content-center">
-                            <div ref={brandBtnRef} aria-label="Google Sign-In for Brands"></div>
-                            <p className="mt-2 mb-0 small text-muted">Continue as <strong>Brand</strong></p>
-                          </div>
-                        </div>
-                      </div>
+                  {/* Single Google button + Role chips */}
+                  <div className="d-flex flex-column align-items-center gap-3 mb-6 pb-6 border-bottom w-100">
+                    <h5 className="mb-1">Quick Sign-In</h5>
+
+                    {/* Role chips */}
+                    <div className="d-flex gap-2">
+                      <button type="button" onClick={() => setRole('Influencer')} className={`btn btn-sm ${role === 'Influencer' ? 'btn-primary' : 'btn-outline-secondary'}`}>Influencer</button>
+                      <button type="button" onClick={() => setRole('Brand')} className={`btn btn-sm ${role === 'Brand' ? 'btn-primary' : 'btn-outline-secondary'}`}>Brand</button>
                     </div>
+                    <small className="text-muted">Choose a role, then continue with Google</small>
+
+                    {/* One Google button */}
+                    <div ref={googleBtnRef} aria-label="Google Sign-In"></div>
+
                     {googleUser && (
-                      <div className="alert alert-success d-flex align-items-center gap-2 mt-3 mb-0 w-100">
+                      <div className="alert alert-success d-flex align-items-center gap-2 mt-2 mb-0 w-100">
                         <iconify-icon icon="lucide:user-check" className="fs-5"></iconify-icon>
                         <span>
                           Signed in as <strong>{googleUser.name}</strong> ({googleUser.email}) — {role || 'Role not set'}
