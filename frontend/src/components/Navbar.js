@@ -23,6 +23,12 @@ export default function Navbar() {
         .nav-brand-reveal .pulse-z {
           display:inline-block;
           animation: pulseZ 8s ease-in-out infinite;
+          /* make sure the letter keeps the same gradient text as the parent */
+          background: inherit;
+          background-size: inherit;
+          background-position: inherit;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
         @keyframes pulseZ {
           0%, 70%, 100% { transform: scale(1); }
