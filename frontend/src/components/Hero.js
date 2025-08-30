@@ -61,7 +61,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="d-flex gap-3 flex-wrap mt-4"
+            className="d-flex gap-3 flex-wrap mt-4 align-items-center"
             data-aos="fade-up"
             data-aos-delay="300"
             data-aos-duration="1000"
@@ -111,35 +111,31 @@ export default function Hero() {
                 className="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"
               ></iconify-icon>
             </a>
+          </div>
 
-            {/* Social logos row */}
-            <div className="d-flex justify-content-end mt-5 pe-4 social-row">
-              <iconify-icon icon="ri:youtube-fill" class="display-3 social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
-              <iconify-icon icon="simple-icons:youtubeshorts" class="display-3 social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
-              <iconify-icon icon="ri:instagram-fill" class="display-3 social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
-              <iconify-icon icon="ri:facebook-fill" class="display-3 social-icon" aria-label="Facebook" role="img"></iconify-icon>
-            </div>
+          <div
+            className="mt-3 d-flex justify-content-end pe-4 social-row"
+            data-aos="fade-up"
+            data-aos-delay="420"
+            data-aos-duration="900"
+          >
+            <iconify-icon icon="ri:youtube-fill" class="social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
+            <iconify-icon icon="simple-icons:youtubeshorts" class="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
+            <iconify-icon icon="ri:instagram-fill" class="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
+            <iconify-icon icon="ri:facebook-fill" class="social-icon" aria-label="Facebook" role="img"></iconify-icon>
           </div>
         </div>
       </div>
       <style>{`
         .social-row .social-icon {
           display: inline-block;
+          line-height: 1; /* avoid inflating row height */
           transform: translateZ(0);
           transition: transform 200ms ease, filter 200ms ease;
           will-change: transform;
           cursor: default;
-        }
-        .social-row:hover .social-icon { transform: scale(1.08); }
-        .social-row .social-icon:hover { transform: scale(1.25); }
-        @media (prefers-reduced-motion: reduce) {
-          .social-row .social-icon,
-          .social-row:hover .social-icon,
-          .social-row .social-icon:hover { transition: none; transform: none; }
-        }
-        .social-row .social-icon {
-          font-size: 3rem !important; /* force bigger size */
-          color: inherit; /* use icon's default brand color */
+          font-size: 3rem !important; /* base size */
+          color: inherit; /* brand color from icon */
         }
         @media (min-width: 992px) {
           .social-row .social-icon { font-size: 4rem !important; }
