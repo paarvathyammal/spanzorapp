@@ -131,13 +131,13 @@ export default function ContactSection() {
     if (roleField) roleField.value = '';
   }
 
-  // Submit (keeps your existing Formspree + optional reCAPTCHA pattern)
+  // Submit to Formspree only
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
     try {
-      // If you’re using reCAPTCHA v3, keep this block; otherwise it will just skip if window.grecaptcha is missing.
+      // Optional reCAPTCHA v3
       await new Promise((resolve, reject) => {
         if (!window.grecaptcha) return resolve();
         window.grecaptcha.ready(() => {
@@ -155,21 +155,32 @@ export default function ContactSection() {
         });
       });
 
-      const res = await fetch(process.env.REACT_APP_FORMSPREE_ENDPOINT, {
+      const formData = new FormData(form);
+      if (!formData.get('role')) formData.set('role', role || '');
+      if (!formData.get('submittedAt')) formData.set('submittedAt', new Date().toISOString());
+
+      const formspreeURL = process.env.REACT_APP_FORMSPREE_ENDPOINT;
+      if (!formspreeURL) {
+        setStatus('error');
+        setResponseMessage('❌ Missing REACT_APP_FORMSPREE_ENDPOINT.');
+        return;
+      }
+
+      const res = await fetch(formspreeURL, {
         method: 'POST',
-        body: new FormData(form),
+        body: formData,
         headers: { Accept: 'application/json' },
       });
 
       if (res.ok) {
         setStatus('success');
-        setResponseMessage('✅ Thank you! Your campaign brief has been submitted successfully. We will contact you within 24 hours.');
+        setResponseMessage('✅ Submitted successfully. We will contact you within 24 hours.');
         form.reset();
         setGoogleUser(null);
         setRole('');
       } else {
         setStatus('error');
-        setResponseMessage('❌ Something went wrong. Please try again.');
+        setResponseMessage('❌ Submission failed. Please try again.');
       }
     } catch (err) {
       setStatus('error');
@@ -230,7 +241,7 @@ export default function ContactSection() {
                       <button type="button" onClick={() => setRole('Influencer')} className={`btn btn-sm ${role === 'Influencer' ? 'btn-primary' : 'btn-outline-secondary'}`}>Influencer</button>
                       <button type="button" onClick={() => setRole('Brand')} className={`btn btn-sm ${role === 'Brand' ? 'btn-primary' : 'btn-outline-secondary'}`}>Brand</button>
                     </div>
-                    <small className="text-muted">Choose a role, then continue with Google</small>
+                    <small className="text-muted">Choose a role, then sign in with Google to unlock the form</small>
 
                     {/* One Google button */}
                     <div ref={googleBtnRef} aria-label="Google Sign-In"></div>
@@ -249,12 +260,19 @@ export default function ContactSection() {
                   </div>
 
                   {/* ROLE-SPECIFIC FORMS */}
-                  {role === 'Influencer' && (
-                    <InfluencerForm onSubmit={handleSubmit} cityInputRef={cityInputRef} role={role} />
+                  {role === 'Influencer' && googleUser && (
+                    <InfluencerForm onSubmit={handleSubmit} cityInputRef={cityInputRef} role={role} googleUser={googleUser} />
                   )}
 
-                  {role === 'Brand' && (
-                    <BrandForm onSubmit={handleSubmit} cityInputRef={cityInputRef} role={role} />
+                  {role === 'Brand' && googleUser && (
+                    <BrandForm onSubmit={handleSubmit} cityInputRef={cityInputRef} role={role} googleUser={googleUser} />
+                  )}
+
+                  {role && !googleUser && (
+                    <div className="alert alert-warning d-flex align-items-center gap-2 mb-0">
+                      <iconify-icon icon="lucide:log-in" className="fs-5"></iconify-icon>
+                      <span>Please sign in with Google above to continue with the {role.toLowerCase()} form.</span>
+                    </div>
                   )}
 
                   {!role && (
@@ -285,10 +303,12 @@ export default function ContactSection() {
 // =====================
 // Influencer Form
 // =====================
-function InfluencerForm({ onSubmit, cityInputRef, role }) {
+function InfluencerForm({ onSubmit, cityInputRef, role, googleUser }) {
   return (
     <form onSubmit={onSubmit}>
       <input type="hidden" name="role" value={role || 'Influencer'} />
+      <input type="hidden" name="googleEmail" value={googleUser?.email || ''} />
+      <input type="hidden" name="googleName" value={googleUser?.name || ''} />
 
       <div className="row g-4 mb-4">
         <div className="col-md-6">
@@ -383,10 +403,12 @@ function InfluencerForm({ onSubmit, cityInputRef, role }) {
 // =====================
 // Brand Form
 // =====================
-function BrandForm({ onSubmit, cityInputRef, role }) {
+function BrandForm({ onSubmit, cityInputRef, role, googleUser }) {
   return (
     <form onSubmit={onSubmit}>
       <input type="hidden" name="role" value={role || 'Brand'} />
+      <input type="hidden" name="googleEmail" value={googleUser?.email || ''} />
+      <input type="hidden" name="googleName" value={googleUser?.name || ''} />
 
       <div className="row g-4 mb-4">
         <div className="col-md-6">
