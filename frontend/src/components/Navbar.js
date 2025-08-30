@@ -11,11 +11,37 @@ export default function Navbar() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           animation: gradientShift 6s ease infinite;
+          position: relative;
         }
         @keyframes gradientShift {
           0%{ background-position:0% 50% }
           50%{ background-position:100% 50% }
           100%{ background-position:0% 50% }
+        }
+
+        /* Shimmer sweep across whole word */
+        .nav-brand-reveal::after {
+          content: "";
+          position: absolute;
+          top: 0; left: -150%;
+          width: 150%; height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+          animation: shimmerSweep 10s linear infinite;
+        }
+        @keyframes shimmerSweep {
+          0%,90% { left: -150%; }
+          100%   { left: 150%; }
+        }
+
+        /* Pulse just the Z */
+        .nav-brand-reveal .pulse-z {
+          display:inline-block;
+          animation: pulseZ 8s ease-in-out infinite;
+        }
+        @keyframes pulseZ {
+          0%, 70%, 100% { transform: scale(1); }
+          75% { transform: scale(1.15); }
+          80% { transform: scale(1); }
         }
       `}</style>
 
@@ -26,7 +52,7 @@ export default function Navbar() {
               <a href="#" className="logo-white d-flex align-items-center">
                 {/* Add reveal animation class here */}
                 <span className="spanzor-brand nav-brand nav-brand-reveal">
-                  Spanzor
+                  Span<span className="pulse-z">z</span>or
                 </span>
               </a>
             </div>
