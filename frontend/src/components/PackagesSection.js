@@ -38,7 +38,7 @@ export default function PackagesSection() {
     },
     { 
       icon: '💎', 
-      title: 'Mega', 
+      title: 'Super Elite', 
       price: '₹15,00,000 – ₹25,00,000', 
       description: 'Super-elite creators for maximum visibility.',
       features: ['Celebrity partnerships', 'Global campaigns', 'Brand ambassadorships', 'Executive support'],
