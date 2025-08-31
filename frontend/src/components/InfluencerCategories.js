@@ -94,7 +94,7 @@ export default function InfluencerCategories() {
       icon: 'lucide:crown',
     },
     {
-      title: 'Super Elite',
+      title: 'Mega',
       range: '25M–50M followers',
       punch: 'Mass‑market creators with continent‑scale reach',
       metrics: [
@@ -108,7 +108,7 @@ export default function InfluencerCategories() {
         'Usage & paid amplification',
         'Monthly strategy sync',
       ],
-      cta: 'Book Super Elite',
+      cta: 'Book Mega',
       icon: 'lucide:trophy',
     },
     {
@@ -205,6 +205,38 @@ export default function InfluencerCategories() {
             </div>
           ))}
         </div>
+
+        {/* Join CTA for Influencers */}
+        <div className="row mt-5" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
+          <div className="col-12 col-xl-8 ms-auto">
+            <div className="card border-0 join-card">
+              <div className="card-body p-5 p-xl-6 d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
+                <div className="flex-grow-1">
+                  <div className="d-flex align-items-center gap-2 mb-2">
+                    <iconify-icon icon="lucide:badge-check" class="text-success" style={{fontSize:'22px'}}></iconify-icon>
+                    <h4 className="mb-0">Join Spanzor — built for creators</h4>
+                  </div>
+                  <p className="mb-3 text-body-secondary">Create a free profile, get matched to brand briefs, and manage payouts in one dashboard.</p>
+
+                  <div className="d-flex flex-wrap gap-4">
+                    <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Free listing</div>
+                    <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Auto‑matched campaigns</div>
+                    <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Transparent payouts</div>
+                    <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Keep content ownership</div>
+                  </div>
+                </div>
+
+                <div className="ms-lg-auto">
+                  <a href="#contact" className="btn btn-lg px-4 join-btn d-inline-flex align-items-center gap-2">
+                    <span>Join as Influencer</span>
+                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                  </a>
+                  <div className="small text-body-secondary mt-2">It’s free. Takes less than 2 minutes.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Background art (kept) */}
@@ -240,6 +272,19 @@ export default function InfluencerCategories() {
         /* Range size */
         #categories .display-6{ font-size: 2rem; }
         @media (min-width: 1400px){ #categories .display-6{ font-size: 2.2rem; } }
+
+        /* Join CTA card styling */
+        #categories .join-card{ 
+          background: radial-gradient(120% 120% at 0% 0%, #F5FFE0 0%, #FFFFFF 45%);
+          border: 1px solid rgba(15,22,27,.06); 
+          box-shadow: 0 10px 30px rgba(15,22,27,.08);
+          border-radius: 18px;
+        }
+        #categories .mini-check{
+          width: 14px; height: 14px; border-radius: 999px; display:inline-block; background:#A6FF47; box-shadow:0 0 0 4px rgba(166,255,71,.20);
+        }
+        #categories .join-btn{ background:#C7FF6E; color:#0e1419; border:none; border-radius:999px; }
+        #categories .join-btn:hover{ filter:brightness(0.95); }
       `}</style>
     </section>
   );
