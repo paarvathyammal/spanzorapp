@@ -94,6 +94,24 @@ export default function InfluencerCategories() {
       icon: 'lucide:crown',
     },
     {
+      title: 'Mega',
+      range: '25M–50M followers',
+      punch: 'Mass‑market creators with continent‑scale reach',
+      metrics: [
+        { k: '120+', label: 'Campaigns' },
+        { k: '35M', label: 'Avg Reach' },
+        { k: '8.4%', label: 'Engagement' },
+      ],
+      includes: [
+        'Cross‑platform domination',
+        'Dedicated producer & legal',
+        'Usage & paid amplification',
+        'Monthly strategy sync',
+      ],
+      cta: 'Book Mega',
+      icon: 'lucide:trophy',
+    },
+    {
       title: 'Legendary',
       range: '50M+ followers',
       punch: 'Ultra‑exclusive mega‑influencers',
