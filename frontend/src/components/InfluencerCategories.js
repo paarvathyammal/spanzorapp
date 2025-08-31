@@ -94,7 +94,7 @@ export default function InfluencerCategories() {
       icon: 'lucide:crown',
     },
     {
-      title: 'Mega',
+      title: 'Super Elite',
       range: '25M–50M followers',
       punch: 'Mass‑market creators with continent‑scale reach',
       metrics: [
@@ -108,7 +108,7 @@ export default function InfluencerCategories() {
         'Usage & paid amplification',
         'Monthly strategy sync',
       ],
-      cta: 'Book Mega',
+      cta: 'Book Super Elite',
       icon: 'lucide:trophy',
     },
     {
