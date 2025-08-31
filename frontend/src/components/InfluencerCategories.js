@@ -132,7 +132,7 @@ export default function InfluencerCategories() {
   ];
 
   return (
-    <section id="categories" className="py-5 py-lg-11 py-xl-12 position-relative overflow-hidden bg-body-tertiary">
+    <section id="categories" className="py-7 py-lg-11 py-xl-12 position-relative overflow-hidden bg-body-tertiary">
       <div className="container">
         {/* Header */}
         <div className="row gap-7 gap-xl-0 align-items-start mb-6">
@@ -207,9 +207,9 @@ export default function InfluencerCategories() {
         </div>
 
         {/* Join CTA for Influencers */}
-        <div className="row mt-5" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
-          <div className="col-12 col-xl-8 ms-auto">
-            <div className="card border-0 join-card">
+        <div className="row mt-6 justify-content-end" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
+          <div className="col-12 col-lg-10 col-xl-8">
+            <div className="card border-0 join-card w-100">
               <div className="card-body p-5 p-xl-6 d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
                 <div className="flex-grow-1">
                   <div className="d-flex align-items-center gap-2 mb-2">
@@ -240,13 +240,15 @@ export default function InfluencerCategories() {
       </div>
 
       {/* Background art (kept) */}
-      <div className="position-absolute bottom-0 start-0" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1000">
+      <div className="bg-art" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1000">
         <img src="/assets/images/backgrounds/stats-facts-bg.svg" alt="" className="img-fluid" />
       </div>
 
       {/* Scoped styles to match pricing card look */}
       <style>{`
         #categories { color: inherit; }
+        #categories .container{ position:relative; z-index:2; }
+        #categories .bg-art{ position:absolute; inset:auto auto 0 0; z-index:1; pointer-events:none; }
         /* Light background section to match pricing */
         #categories.bg-body-tertiary { background: var(--bs-body-tertiary-bg, #f5f7fa); }
         /* White cards like pricing */
@@ -272,6 +274,9 @@ export default function InfluencerCategories() {
         /* Range size */
         #categories .display-6{ font-size: 2rem; }
         @media (min-width: 1400px){ #categories .display-6{ font-size: 2.2rem; } }
+        @media (min-width:1200px){
+          #categories .row.g-4{ --bs-gutter-x:1.25rem; --bs-gutter-y:1.25rem; }
+        }
 
         /* Join CTA card styling */
         #categories .join-card{ 
@@ -280,6 +285,14 @@ export default function InfluencerCategories() {
           box-shadow: 0 10px 30px rgba(15,22,27,.08);
           border-radius: 18px;
         }
+        #categories .join-card{ max-width:920px; margin-left:auto; }
+        @media (min-width:1200px){
+          #categories .join-card{ margin-right:var(--bs-gutter-x, 0.75rem); }
+        }
+        /* Give the section a bit more bottom space so the card never crowds the next section */
+        #categories{ padding-bottom:4rem; }
+        @media (min-width:992px){ #categories{ padding-bottom:5rem; } }
+
         #categories .mini-check{
           width: 14px; height: 14px; border-radius: 999px; display:inline-block; background:#A6FF47; box-shadow:0 0 0 4px rgba(166,255,71,.20);
         }
