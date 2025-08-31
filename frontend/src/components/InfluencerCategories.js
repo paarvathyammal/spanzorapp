@@ -154,7 +154,7 @@ export default function InfluencerCategories() {
         {/* Cards Grid */}
         <div className="row g-4" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
           {categories.map((c, idx) => (
-            <div key={c.title} className="col-12 col-md-6 col-xl-4">
+            <div key={c.title} className="col-12 col-md-6 col-lg-4 col-xxl-3">
               <div className={`card h-100 shadow-sm border-0 category-card ${c.featured ? 'category-featured' : ''}`}>
                 <div className="card-body p-5 d-flex flex-column">
                   {/* Title Row */}
@@ -204,10 +204,39 @@ export default function InfluencerCategories() {
               </div>
             </div>
           ))}
+            {/* Join CTA (fills the last row on lg+) */}
+            <div className="col-12 col-lg-8 d-none d-lg-block">
+              <div className="card border-0 join-card w-100">
+                <div className="card-body p-5 p-xl-6 d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
+                  <div className="flex-grow-1">
+                    <div className="d-flex align-items-center gap-2 mb-2">
+                      <iconify-icon icon="lucide:badge-check" class="text-success" style={{fontSize:'22px'}}></iconify-icon>
+                      <h4 className="mb-0">Join Spanzor — built for creators</h4>
+                    </div>
+                    <p className="mb-3 text-body-secondary">Create a free profile, get matched to brand briefs, and manage payouts in one dashboard.</p>
+
+                    <div className="d-flex flex-wrap gap-4">
+                      <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Free listing</div>
+                      <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Auto‑matched campaigns</div>
+                      <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Transparent payouts</div>
+                      <div className="d-flex align-items-center gap-2"><span className="mini-check"/> Keep content ownership</div>
+                    </div>
+                  </div>
+
+                  <div className="ms-lg-auto">
+                    <a href="#contact" className="btn btn-lg px-4 join-btn d-inline-flex align-items-center gap-2">
+                      <span>Join as Influencer</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                    </a>
+                    <div className="small text-body-secondary mt-2">It’s free. Takes less than 2 minutes.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
 
         {/* Join CTA for Influencers */}
-        <div className="row mt-6 justify-content-end" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
+        <div className="row mt-6 justify-content-end d-lg-none" data-aos="fade-left" data-aos-delay="150" data-aos-duration="1000">
           <div className="col-12 col-lg-10 col-xl-8">
             <div className="card border-0 join-card w-100">
               <div className="card-body p-5 p-xl-6 d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
@@ -277,6 +306,8 @@ export default function InfluencerCategories() {
         @media (min-width:1200px){
           #categories .row.g-4{ --bs-gutter-x:1.25rem; --bs-gutter-y:1.25rem; }
         }
+        @media (min-width:1400px){ #categories .container{ max-width: 1280px; } }
+        #categories .row.g-4{ margin-bottom: 0.5rem; }
 
         /* Join CTA card styling */
         #categories .join-card{ 
@@ -285,10 +316,8 @@ export default function InfluencerCategories() {
           box-shadow: 0 10px 30px rgba(15,22,27,.08);
           border-radius: 18px;
         }
-        #categories .join-card{ max-width:920px; margin-left:auto; }
-        @media (min-width:1200px){
-          #categories .join-card{ margin-right:var(--bs-gutter-x, 0.75rem); }
-        }
+        #categories .join-card{ width:100%; }
+        @media (min-width:992px){ #categories .join-card{ margin-top: 0; } }
         /* Give the section a bit more bottom space so the card never crowds the next section */
         #categories{ padding-bottom:4rem; }
         @media (min-width:992px){ #categories{ padding-bottom:5rem; } }
