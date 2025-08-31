@@ -114,7 +114,7 @@ export default function InfluencerCategories() {
   ];
 
   return (
-    <section id="categories" className="py-5 py-lg-11 py-xl-12 position-relative overflow-hidden">
+    <section id="categories" className="py-5 py-lg-11 py-xl-12 position-relative overflow-hidden bg-body-tertiary">
       <div className="container">
         {/* Header */}
         <div className="row gap-7 gap-xl-0 align-items-start mb-6">
@@ -196,12 +196,30 @@ export default function InfluencerCategories() {
 
       {/* Scoped styles to match pricing card look */}
       <style>{`
-        #categories { color: #e6edf3; }
-        #categories .category-card{ border-radius: 18px; background: #0f161b; border: 1px solid rgba(255,255,255,.06); }
-        #categories .category-featured{ outline: 2px solid rgba(166,255,71,.25); box-shadow: 0 10px 40px rgba(166,255,71,.08); }
-        #categories .check-dot{ width: 22px; height: 22px; border-radius: 999px; display:inline-block; background: radial-gradient(circle at 30% 30%, #A6FF47 0%, #75ff36 35%, #2b2 100%); box-shadow: 0 0 0 4px rgba(166,255,71,.12); }
+        #categories { color: inherit; }
+        /* Light background section to match pricing */
+        #categories.bg-body-tertiary { background: var(--bs-body-tertiary-bg, #f5f7fa); }
+        /* White cards like pricing */
+        #categories .category-card{ 
+          border-radius: 18px; 
+          background: #ffffff; 
+          border: 1px solid rgba(15,22,27,.06); 
+          box-shadow: 0 6px 24px rgba(15,22,27,.06);
+        }
+        #categories .category-featured{ 
+          outline: 2px solid rgba(166,255,71,.35); 
+          box-shadow: 0 12px 48px rgba(166,255,71,.14);
+        }
+        /* Green tick like pricing */
+        #categories .check-dot{ 
+          width: 20px; height: 20px; border-radius: 999px; display:inline-block; 
+          background: #A6FF47; 
+          box-shadow: 0 0 0 6px rgba(166,255,71,.18);
+        }
+        /* CTA button matches site palette */
         #categories .btn{ background: #C7FF6E; color: #0e1419; border: none; border-radius: 999px; padding: 14px 18px; }
         #categories .btn:hover{ filter: brightness(0.95); }
+        /* Range size */
         #categories .display-6{ font-size: 2rem; }
         @media (min-width: 1400px){ #categories .display-6{ font-size: 2.2rem; } }
       `}</style>
