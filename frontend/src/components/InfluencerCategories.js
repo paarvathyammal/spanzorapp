@@ -14,57 +14,54 @@ export default function InfluencerCategories() {
       <div className="container">
         <div className="row gap-7 gap-xl-0">
           <div className="col-xl-4 col-xxl-4">
-            <div className="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+            <div
+              className="d-flex align-items-center gap-7 py-2"
+              data-aos="fade-right"
+              data-aos-delay="100"
+              data-aos-duration="1000"
+            >
               <span className="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">01</span>
               <hr className="border-line" />
               <span className="badge text-bg-dark">Creator Categories</span>
             </div>
           </div>
+
           <div className="col-xl-8 col-xxl-7">
-            <div className="d-flex flex-column gap-9">
-              <div className="row">
-                <div className="col-xxl-8">
-                  <div className="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                    <h2 className="mb-0">Influencer Categories</h2>
-                    <p className="fs-5 mb-0">Choose the creator tier that matches your goals and budget. Our curated network spans from emerging voices to legendary influencers across all categories.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                {categories.slice(0, 3).map((category, index) => (
-                  <div key={index} className="col-md-6 col-lg-4 mb-7 mb-lg-0">
-                    <div className="d-flex flex-column gap-6 pt-9 border-top" data-aos="fade-up" data-aos-delay={(index + 2) * 100} data-aos-duration="1000">
-                      <h3 className="mb-0 fs-14">{category.range}</h3>
-                      <div>
-                        <h4 className="mb-2">{category.title}</h4>
-                        <p className="mb-2">{category.description}</p>
-                        <p className="mb-0 text-primary fw-semibold">{category.metric}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+              <h2 className="mb-0">Influencer Categories</h2>
+              <p className="fs-5 mb-0">
+                Choose the creator tier that matches your goals and budget. Our curated network spans from
+                emerging voices to legendary influencers across all categories.
+              </p>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Additional Categories Grid */}
-      <div className="container mt-11">
-        <div className="row">
-          {categories.slice(3).map((category, index) => (
-            <div key={index} className="col-md-6 col-xl-3 mb-7 mb-xl-0">
-              <div className="card h-100" data-aos="fade-up" data-aos-delay={(index + 1) * 100} data-aos-duration="1000">
-                <div className="card-body d-flex flex-column gap-4">
-                  <div className="d-flex align-items-center gap-3">
-                    <span className="badge bg-primary text-dark px-3 py-2">{category.range}</span>
+
+        {/* Unified Grid (same pattern for all cards) */}
+        <div className="row mt-8">
+          {categories.map((category, index) => (
+            <div key={index} className="col-sm-6 col-lg-4 col-xl-3 mb-6">
+              <div
+                className="card h-100 shadow-sm border-0"
+                data-aos="fade-up"
+                data-aos-delay={(index + 1) * 80}
+                data-aos-duration="900"
+              >
+                <div className="card-body d-flex flex-column">
+                  {/* Range pill (smaller & consistent) */}
+                  <div className="d-flex align-items-center mb-3">
+                    <span className="badge bg-primary text-dark px-3 py-1 fw-semibold" style={{fontSize: '0.8rem'}}>
+                      {category.range}
+                    </span>
                   </div>
-                  <div>
-                    <h5 className="mb-2">{category.title}</h5>
-                    <p className="mb-2 text-muted">{category.description}</p>
-                    <p className="mb-0 text-primary fw-semibold fs-6">{category.metric}</p>
-                  </div>
-                  <a href="#packages" className="btn btn-outline-primary mt-auto">
+
+                  {/* Title & description (reduced sizes) */}
+                  <h5 className="mb-1" style={{fontWeight: 700}}>{category.title}</h5>
+                  <p className="mb-2 text-muted" style={{fontSize: '0.95rem'}}>{category.description}</p>
+                  <p className="mb-4 text-primary fw-semibold" style={{fontSize: '0.9rem'}}>{category.metric}</p>
+
+                  {/* CTA */}
+                  <a href="#packages" className="btn btn-outline-primary btn-sm mt-auto align-self-start">
                     <span className="btn-text">Explore This Category</span>
                     <iconify-icon icon="lucide:arrow-up-right" className="btn-icon ms-2 fs-6"></iconify-icon>
                   </a>
@@ -74,10 +71,27 @@ export default function InfluencerCategories() {
           ))}
         </div>
       </div>
-      
-      <div className="position-absolute bottom-0 start-0" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1000">
+
+      {/* Background art */}
+      <div
+        className="position-absolute bottom-0 start-0"
+        data-aos="zoom-in"
+        data-aos-delay="100"
+        data-aos-duration="1000"
+      >
         <img src="/assets/images/backgrounds/stats-facts-bg.svg" alt="" className="img-fluid" />
       </div>
+
+      {/* Local sizing tweaks for this section only */}
+      <style>{`
+        #categories .card { background: #0f161b; border: 1px solid rgba(255,255,255,0.06); }
+        #categories .card:hover { transform: translateY(-2px); transition: transform .2s ease; }
+        #categories h5 { font-size: 1.05rem; }
+        @media (min-width: 1200px){
+          /* ensure a tidy 4-up grid on xl while remaining responsive */
+          #categories .col-xl-3 { flex: 0 0 auto; width: 25%; }
+        }
+      `}</style>
     </section>
   );
 }
