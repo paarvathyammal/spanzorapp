@@ -11,6 +11,53 @@ export default function Hero() {
     }
   }, []);
 
+  useEffect(() => {
+    // Respect reduced motion
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const wrapper = document.querySelector('.social-icons-wrapper');
+    if (!wrapper) return;
+    const icons = Array.from(wrapper.querySelectorAll('.social-icon'));
+    if (!icons.length) return;
+
+    const R = 180;           // influence radius in px
+    const MAX_BOOST = 0.35;  // max extra scale (1 -> 1.35)
+
+    function onMove(e){
+      const x = e.clientX;
+      const y = e.clientY;
+      icons.forEach(icon => {
+        const rect = icon.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const d = Math.hypot(x - cx, y - cy);
+        const t = Math.max(0, 1 - d / R); // 0..1 falloff
+        const scale = 1 + t * MAX_BOOST;
+        icon.style.transform = `scale(${scale})`;
+      });
+    }
+
+    function onLeave(){
+      icons.forEach(icon => { icon.style.transform = 'scale(1)'; });
+    }
+
+    wrapper.addEventListener('mousemove', onMove);
+    wrapper.addEventListener('mouseleave', onLeave);
+
+    // Touch support: slight lift on touchmove
+    wrapper.addEventListener('touchmove', (ev) => {
+      if (!ev.touches || !ev.touches[0]) return;
+      onMove({ clientX: ev.touches[0].clientX, clientY: ev.touches[0].clientY });
+    }, { passive: true });
+    wrapper.addEventListener('touchend', onLeave, { passive: true });
+
+    return () => {
+      wrapper.removeEventListener('mousemove', onMove);
+      wrapper.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
+
   return (
     <section id="hero" className="banner-section position-relative d-flex align-items-end min-vh-100">
       <div
@@ -137,6 +184,7 @@ export default function Hero() {
           transform: translateZ(0);
           transition: transform 200ms ease, filter 200ms ease;
           will-change: transform;
+          backface-visibility: hidden;
           cursor: default;
           font-size: 2rem !important; /* base size */
           color: #FFFFFF;
