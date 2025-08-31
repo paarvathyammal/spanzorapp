@@ -1,18 +1,123 @@
+// Influencer categories presented as pricing-style cards (consistent with plans UI)
 export default function InfluencerCategories() {
   const categories = [
-    { title: "Emerging Voices", range: "20K–50K", description: "Fresh perspectives from rising talents", metric: "5,200+ creators" },
-    { title: "Growth Champions", range: "50K–500K", description: "Proven engagement with growing audiences", metric: "3,800+ creators" },
-    { title: "Rising Icons", range: "500K–2M", description: "Established voices with strong influence", metric: "1,500+ creators" },
-    { title: "Premium", range: "2M–10M", description: "High-impact creators with massive reach", metric: "800+ creators" },
-    { title: "Elite", range: "10M–25M", description: "Top-tier influencers with premium audiences", metric: "200+ creators" },
-    { title: "Super Elite", range: "25M–50M", description: "Celebrity-level creators with global reach", metric: "85+ creators" },
-    { title: "Legendary", range: "50M+", description: "Ultra-exclusive mega-influencers", metric: "25+ creators" }
+    {
+      title: 'Emerging Voices',
+      range: '20K–50K followers',
+      punch: 'Fresh perspectives from rising talents',
+      metrics: [
+        { k: '2.1K+', label: 'Campaigns' },
+        { k: '0.8M', label: 'Avg Reach' },
+        { k: '3.9%', label: 'Engagement' },
+      ],
+      includes: [
+        'Nano & micro creators',
+        'Basic campaign guidance',
+        'Starter analytics',
+        'Email support',
+      ],
+      cta: 'Explore Emerging',
+      icon: 'lucide:sparkles',
+    },
+    {
+      title: 'Growth Champions',
+      range: '50K–500K followers',
+      punch: 'Proven engagement with growing audiences',
+      badge: 'Popular',
+      metrics: [
+        { k: '3.8K+', label: 'Campaigns' },
+        { k: '2.5M', label: 'Avg Reach' },
+        { k: '5.4%', label: 'Engagement' },
+      ],
+      includes: [
+        'Micro & mid-tier creators',
+        'Advanced optimization',
+        'Priority support',
+        'A/B testing',
+      ],
+      cta: 'Choose Growth',
+      icon: 'lucide:rocket',
+      featured: true,
+    },
+    {
+      title: 'Rising Icons',
+      range: '500K–2M followers',
+      punch: 'Established voices with strong influence',
+      metrics: [
+        { k: '1.5K+', label: 'Campaigns' },
+        { k: '6.8M', label: 'Avg Reach' },
+        { k: '6.1%', label: 'Engagement' },
+      ],
+      includes: [
+        'Mid-tier creators',
+        'Creative studio collab',
+        'Performance reporting',
+        'Guided deliverables',
+      ],
+      cta: 'Work with Icons',
+      icon: 'lucide:trending-up',
+    },
+    {
+      title: 'Premium',
+      range: '2M–10M followers',
+      punch: 'High‑impact creators with massive reach',
+      metrics: [
+        { k: '800+', label: 'Campaigns' },
+        { k: '12M', label: 'Avg Reach' },
+        { k: '7.2%', label: 'Engagement' },
+      ],
+      includes: [
+        'Top creators & vertical fit',
+        'Custom strategy',
+        'Dedicated manager',
+        '24/7 support',
+      ],
+      cta: 'Choose Premium',
+      icon: 'lucide:star',
+    },
+    {
+      title: 'Elite',
+      range: '10M–25M followers',
+      punch: 'Top‑tier influencers with premium audiences',
+      metrics: [
+        { k: '200+', label: 'Campaigns' },
+        { k: '22M', label: 'Avg Reach' },
+        { k: '7.8%', label: 'Engagement' },
+      ],
+      includes: [
+        'Cross‑platform packages',
+        'Creator shortlists',
+        'Usage & whitelisting',
+        'Quarterly reviews',
+      ],
+      cta: 'Book Elite',
+      icon: 'lucide:crown',
+    },
+    {
+      title: 'Legendary',
+      range: '50M+ followers',
+      punch: 'Ultra‑exclusive mega‑influencers',
+      metrics: [
+        { k: '25+', label: 'Campaigns' },
+        { k: '50M+', label: 'Avg Reach' },
+        { k: '8.9%', label: 'Engagement' },
+      ],
+      includes: [
+        'Global celebrity roster',
+        'High‑touch production',
+        'Brand safety & legal',
+        'White‑glove service',
+      ],
+      cta: 'Talk to Sales',
+      icon: 'lucide:gem',
+    },
   ];
 
   return (
-    <section id="categories" className="stats-facts py-5 py-lg-11 py-xl-12 position-relative overflow-hidden">
+    <section id="categories" className="py-5 py-lg-11 py-xl-12 position-relative overflow-hidden">
       <div className="container">
-        <div className="row gap-7 gap-xl-0">
+        {/* Header */}
+        <div className="row gap-7 gap-xl-0 align-items-start mb-6">
           <div className="col-xl-4 col-xxl-4">
             <div className="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
               <span className="round-36 flex-shrink-0 text-dark rounded-circle bg-primary hstack justify-content-center fw-medium">01</span>
@@ -21,63 +126,85 @@ export default function InfluencerCategories() {
             </div>
           </div>
           <div className="col-xl-8 col-xxl-7">
-            <div className="d-flex flex-column gap-9">
-              <div className="row">
-                <div className="col-xxl-8">
-                  <div className="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                    <h2 className="mb-0">Influencer Categories</h2>
-                    <p className="fs-5 mb-0">Choose the creator tier that matches your goals and budget. Our curated network spans from emerging voices to legendary influencers across all categories.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                {categories.slice(0, 3).map((category, index) => (
-                  <div key={index} className="col-md-6 col-lg-4 mb-7 mb-lg-0">
-                    <div className="d-flex flex-column gap-6 pt-9 border-top" data-aos="fade-up" data-aos-delay={(index + 2) * 100} data-aos-duration="1000">
-                      <h3 className="mb-0 fs-14">{category.range}</h3>
-                      <div>
-                        <h4 className="mb-2">{category.title}</h4>
-                        <p className="mb-2">{category.description}</p>
-                        <p className="mb-0 text-primary fw-semibold">{category.metric}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+              <h2 className="mb-0">Influencer Categories</h2>
+              <p className="fs-5 mb-0">Same visual language as your pricing — clean cards, quick stats, and a clear CTA for each tier.</p>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Additional Categories Grid */}
-      <div className="container mt-11">
-        <div className="row">
-          {categories.slice(3).map((category, index) => (
-            <div key={index} className="col-md-6 col-xl-3 mb-7 mb-xl-0">
-              <div className="card h-100" data-aos="fade-up" data-aos-delay={(index + 1) * 100} data-aos-duration="1000">
-                <div className="card-body d-flex flex-column gap-4">
-                  <div className="d-flex align-items-center gap-3">
-                    <span className="badge bg-primary text-dark px-3 py-2">{category.range}</span>
+
+        {/* Cards Grid */}
+        <div className="row g-4" data-aos="fade-up" data-aos-delay="150" data-aos-duration="1000">
+          {categories.map((c, idx) => (
+            <div key={c.title} className="col-12 col-md-6 col-xl-4">
+              <div className={`card h-100 shadow-sm border-0 category-card ${c.featured ? 'category-featured' : ''}`}>
+                <div className="card-body p-5 d-flex flex-column">
+                  {/* Title Row */}
+                  <div className="d-flex align-items-center justify-content-between mb-2">
+                    <div className="d-flex align-items-center gap-2">
+                      <iconify-icon icon={c.icon} class="text-primary" style={{fontSize:'22px'}}></iconify-icon>
+                      <h5 className="mb-0">{c.title}</h5>
+                    </div>
+                    {c.badge && <span className="badge rounded-pill text-bg-success-subtle text-success fw-semibold">{c.badge}</span>}
                   </div>
-                  <div>
-                    <h5 className="mb-2">{category.title}</h5>
-                    <p className="mb-2 text-muted">{category.description}</p>
-                    <p className="mb-0 text-primary fw-semibold fs-6">{category.metric}</p>
+
+                  {/* Range */}
+                  <div className="display-6 fw-bold text-success-emphasis mb-2" style={{letterSpacing:'-0.5px'}}>{c.range}</div>
+                  <p className="text-body-secondary mb-4">{c.punch}</p>
+
+                  {/* Metrics Row */}
+                  <div className="d-flex align-items-center gap-5 mb-4 flex-wrap">
+                    {c.metrics.map((m) => (
+                      <div key={m.label} className="d-flex flex-column align-items-start">
+                        <div className="h5 mb-0 fw-bold">{m.k}</div>
+                        <small className="text-body-secondary">{m.label}</small>
+                      </div>
+                    ))}
                   </div>
-                  <a href="#packages" className="btn btn-outline-primary mt-auto">
-                    <span className="btn-text">Explore This Category</span>
-                    <iconify-icon icon="lucide:arrow-up-right" className="btn-icon ms-2 fs-6"></iconify-icon>
-                  </a>
+
+                  {/* Divider */}
+                  <hr className="my-3" />
+
+                  {/* Includes */}
+                  <div className="d-flex flex-column gap-3 mb-4">
+                    {c.includes.map((i) => (
+                      <div key={i} className="d-flex align-items-center gap-2">
+                        <span className="check-dot" />
+                        <span>{i}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <div className="mt-auto">
+                    <a href="#contact" className="btn btn-lg w-100 justify-content-center">
+                      <span className="btn-text">{c.cta}</span>
+                      <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      
+
+      {/* Background art (kept) */}
       <div className="position-absolute bottom-0 start-0" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1000">
         <img src="/assets/images/backgrounds/stats-facts-bg.svg" alt="" className="img-fluid" />
       </div>
+
+      {/* Scoped styles to match pricing card look */}
+      <style>{`
+        #categories { color: #e6edf3; }
+        #categories .category-card{ border-radius: 18px; background: #0f161b; border: 1px solid rgba(255,255,255,.06); }
+        #categories .category-featured{ outline: 2px solid rgba(166,255,71,.25); box-shadow: 0 10px 40px rgba(166,255,71,.08); }
+        #categories .check-dot{ width: 22px; height: 22px; border-radius: 999px; display:inline-block; background: radial-gradient(circle at 30% 30%, #A6FF47 0%, #75ff36 35%, #2b2 100%); box-shadow: 0 0 0 4px rgba(166,255,71,.12); }
+        #categories .btn{ background: #C7FF6E; color: #0e1419; border: none; border-radius: 999px; padding: 14px 18px; }
+        #categories .btn:hover{ filter: brightness(0.95); }
+        #categories .display-6{ font-size: 2rem; }
+        @media (min-width: 1400px){ #categories .display-6{ font-size: 2.2rem; } }
+      `}</style>
     </section>
   );
 }
