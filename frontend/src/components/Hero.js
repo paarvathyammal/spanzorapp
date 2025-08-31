@@ -24,6 +24,15 @@ export default function Hero() {
     const R = 180;           // influence radius in px
     const MAX_BOOST = 0.35;  // max extra scale (1 -> 1.35)
 
+    const brandColors = {
+      "ri:youtube-fill": "255,0,0",
+      "simple-icons:youtubeshorts": "255,0,0",
+      "ri:instagram-fill": "225,48,108",
+      "ri:facebook-fill": "24,119,242",
+      "ri:twitter-x-fill": "29,155,240",
+      "ri:linkedin-box-fill": "10,102,194",
+    };
+
     function onMove(e){
       const x = e.clientX;
       const y = e.clientY;
@@ -35,11 +44,19 @@ export default function Hero() {
         const t = Math.max(0, 1 - d / R); // 0..1 falloff
         const scale = 1 + t * MAX_BOOST;
         icon.style.transform = `scale(${scale})`;
+
+        const iconName = icon.getAttribute("icon");
+        const rgb = brandColors[iconName] || "255,255,255";
+        const glowStrength = (t * 0.6).toFixed(2); // max glow at close
+        icon.style.filter = `drop-shadow(0 0 ${12 * t}px rgba(${rgb},${glowStrength}))`;
       });
     }
 
     function onLeave(){
-      icons.forEach(icon => { icon.style.transform = 'scale(1)'; });
+      icons.forEach(icon => { 
+        icon.style.transform = 'scale(1)'; 
+        icon.style.filter = 'none';
+      });
     }
 
     wrapper.addEventListener('mousemove', onMove);
