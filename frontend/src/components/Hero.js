@@ -47,8 +47,8 @@ export default function Hero() {
 
         const iconName = icon.getAttribute("icon");
         const rgb = brandColors[iconName] || "255,255,255";
-        const glowStrength = (t * 0.6).toFixed(2); // max glow at close
-        icon.style.filter = `drop-shadow(0 0 ${12 * t}px rgba(${rgb},${glowStrength}))`;
+        const glowStrength = (t * 1).toFixed(2); // stronger glow
+        icon.style.filter = `drop-shadow(0 0 ${20 * t}px rgba(${rgb},${glowStrength}))`;
       });
     }
 
