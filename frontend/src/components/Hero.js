@@ -124,6 +124,8 @@ export default function Hero() {
               <iconify-icon icon="simple-icons:youtubeshorts" class="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
               <iconify-icon icon="ri:instagram-fill" class="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
               <iconify-icon icon="ri:facebook-fill" class="social-icon" aria-label="Facebook" role="img"></iconify-icon>
+              <iconify-icon icon="ri:twitter-x-fill" class="social-icon ms-4" aria-label="Twitter/X" role="img"></iconify-icon>
+              <iconify-icon icon="ri:linkedin-box-fill" class="social-icon ms-4" aria-label="LinkedIn" role="img"></iconify-icon>
             </div>
           </div>
         </div>
