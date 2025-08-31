@@ -36,24 +36,21 @@ export default function InfluencerCategories() {
           {/* the line */}
           <div className="scale-line" aria-hidden="true"></div>
 
-          <ul className="scale-nodes list-unstyled m-0 p-0 d-flex justify-content-between">
+          <ul className="scale-nodes list-unstyled m-0 p-0 d-flex flex-wrap justify-content-center">
             {categories.map((c, i) => {
-              // grow size/intensity from left to right
-              const size = 14 + i * 3; // px
-              const isEnd = i === categories.length - 1;
+              const size = 40; // make nodes bigger
               return (
-                <li key={c.title} className="node-wrap text-center">
+                <li key={c.title} className="node-wrap text-center mb-5" style={{ flex: '0 0 33.33%' }}>
                   <button
-                    className={`node ${isEnd ? 'node-end' : ''}`}
+                    className="node"
                     style={{ width: size, height: size }}
                     aria-label={`${c.title} — ${c.range}`}
                   />
-                  <div className="node-label">
+                  <div className="node-label mt-2">
                     <div className="label-title">{c.title}</div>
                     <div className="label-range">{c.range}</div>
                     <div className="label-metric">{c.metric}</div>
                   </div>
-                  {/* tooltip */}
                   <div className="node-tip">
                     <div className="tip-title">{c.title}</div>
                     <div className="tip-desc">{c.description}</div>
@@ -86,9 +83,10 @@ export default function InfluencerCategories() {
           position: relative; z-index: 1; border: 2px solid rgba(255,255,255,.15);
           background: radial-gradient(80% 80% at 30% 25%, rgba(255,255,255,.12), rgba(255,255,255,0) 65%);
           border-radius: 999px; box-shadow: 0 2px 16px rgba(0,0,0,.25);
+          width: 40px; height: 40px;
           transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
         }
-        #categories .node:hover{ transform: scale(1.15); border-color: rgba(255,255,255,.35); box-shadow: 0 6px 26px rgba(124,92,255,.25), 0 0 0 2px rgba(166,255,71,.15) inset; }
+        #categories .node:hover{ transform: scale(1.2); border-color: rgba(255,255,255,.35); box-shadow: 0 6px 26px rgba(124,92,255,.25), 0 0 0 2px rgba(166,255,71,.15) inset; }
         #categories .node-end{ background: linear-gradient(135deg, rgba(166,255,71,.25), rgba(124,92,255,.25)); border-color: rgba(166,255,71,.45); }
 
         #categories .node-label { line-height: 1.15; }
