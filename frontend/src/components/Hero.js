@@ -138,7 +138,7 @@ export default function Hero() {
           transition: transform 200ms ease, filter 200ms ease;
           will-change: transform;
           cursor: default;
-          font-size: 3rem !important; /* base size */
+          font-size: 2rem !important; /* base size */
           color: #FFFFFF;
         }
         .social-icons-wrapper {
@@ -149,7 +149,7 @@ export default function Hero() {
           gap: 0.75rem;
         }
         @media (min-width: 992px) {
-          .social-row .social-icon { font-size: 4rem !important; }
+          .social-row .social-icon { font-size: 2.5rem !important; }
         }
       `}</style>
     </section>
