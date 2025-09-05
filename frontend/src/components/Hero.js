@@ -184,12 +184,12 @@ export default function Hero() {
             data-aos-duration="900"
           >
             <div className="social-icons-wrapper">
-              <iconify-icon icon="ri:youtube-fill" className="social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
-              <iconify-icon icon="simple-icons:youtubeshorts" className="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
-              <iconify-icon icon="ri:instagram-fill" className="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
-              <iconify-icon icon="ri:facebook-fill" className="social-icon" aria-label="Facebook" role="img"></iconify-icon>
-              <iconify-icon icon="ri:twitter-x-fill" className="social-icon ms-4" aria-label="Twitter/X" role="img"></iconify-icon>
-              <iconify-icon icon="ri:linkedin-box-fill" className="social-icon ms-4" aria-label="LinkedIn" role="img"></iconify-icon>
+              <iconify-icon icon="ri:youtube-fill" class="social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
+              <iconify-icon icon="simple-icons:youtubeshorts" class="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
+              <iconify-icon icon="ri:instagram-fill" class="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
+              <iconify-icon icon="ri:facebook-fill" class="social-icon" aria-label="Facebook" role="img"></iconify-icon>
+              <iconify-icon icon="ri:twitter-x-fill" class="social-icon ms-4" aria-label="Twitter/X" role="img"></iconify-icon>
+              <iconify-icon icon="ri:linkedin-box-fill" class="social-icon ms-4" aria-label="LinkedIn" role="img"></iconify-icon>
             </div>
           </div>
         </div>
@@ -197,40 +197,24 @@ export default function Hero() {
       <style>{`
         .social-row .social-icon {
           display: inline-block;
-          line-height: 1;
+          line-height: 1; /* avoid inflating row height */
           transform: translateZ(0);
           transition: transform 200ms ease, filter 200ms ease;
           will-change: transform;
           backface-visibility: hidden;
           cursor: default;
-          font-size: 2rem !important;
+          font-size: 2rem !important; /* base size */
+          color: #FFFFFF;
         }
         .social-icons-wrapper {
+          position: absolute;
+          top: -60px; /* move slightly more upwards to align with buttons */
+          right: 20%; /* roughly place in the middle between Brand button and right edge */
           display: flex;
           gap: 0.75rem;
         }
-        .social-icons-wrapper .social-icon {
-          color: #FFFFFF !important;
-        }
         @media (min-width: 992px) {
-          .social-icons-wrapper {
-            position: absolute;
-            top: -60px;
-            right: 20%;
-          }
           .social-row .social-icon { font-size: 2.5rem !important; }
-        }
-        @media (max-width: 991px) {
-          .social-row { 
-            justify-content: center !important; 
-            padding-right: 0 !important; 
-          }
-          .social-icons-wrapper {
-            position: static !important;
-            margin-top: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-          }
         }
       `}</style>
     </section>
