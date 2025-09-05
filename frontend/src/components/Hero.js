@@ -216,6 +216,32 @@ export default function Hero() {
         @media (min-width: 992px) {
           .social-row .social-icon { font-size: 2.5rem !important; }
         }
+        /* --- Mobile-friendly social icon strip --- */
+        @media (max-width: 767.98px) {
+          /* center the row on small screens */
+          .social-row { 
+            justify-content: center !important; 
+            padding-right: 0 !important; 
+          }
+          /* make the strip non-overlapping and nicely wrapped */
+          .social-icons-wrapper {
+            position: static;   /* removes absolute so it won't overlap */
+            right: auto;
+            top: auto;
+            display: flex;
+            flex-wrap: wrap;    /* allow wrapping rather than overflow */
+            gap: 0.5rem;        /* tighter gaps on mobile */
+            margin-top: 8px;
+            padding: 6px 10px;  
+            background: rgba(255,255,255,0.08); /* subtle pill */
+            border-radius: 9999px;
+            backdrop-filter: blur(2px);
+          }
+          /* smaller icon size on mobile for better fit */
+          .social-row .social-icon { 
+            font-size: 1.5rem !important; 
+          }
+        }
       `}</style>
     </section>
   );
