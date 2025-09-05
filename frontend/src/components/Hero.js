@@ -207,28 +207,30 @@ export default function Hero() {
           color: #FFFFFF;
         }
         .social-icons-wrapper {
-          position: absolute;
-          top: -60px; /* move slightly more upwards to align with buttons */
-          right: 20%; /* roughly place in the middle between Brand button and right edge */
           display: flex;
           gap: 0.75rem;
-          z-index: 0;
+        }
+        .social-icons-wrapper .social-icon {
+          color: #FFFFFF !important;
         }
         @media (min-width: 992px) {
+          .social-icons-wrapper {
+            position: absolute;
+            top: -60px;
+            right: 20%;
+          }
           .social-row .social-icon { font-size: 2.5rem !important; }
         }
-        @media (max-width: 576px) {
-          /* Place icons below the CTA buttons and center them on small screens */
-          .social-row { justify-content: center !important; padding-right: 0 !important; }
+        @media (max-width: 991px) {
+          .social-row { 
+            justify-content: center !important; 
+            padding-right: 0 !important; 
+          }
           .social-icons-wrapper {
             position: static !important;
-            top: auto !important;
-            right: auto !important;
-            display: flex !important;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
             margin-top: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
           }
         }
       `}</style>
