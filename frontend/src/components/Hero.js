@@ -197,14 +197,13 @@ export default function Hero() {
       <style>{`
         .social-row .social-icon {
           display: inline-block;
-          line-height: 1; /* avoid inflating row height */
+          line-height: 1;
           transform: translateZ(0);
           transition: transform 200ms ease, filter 200ms ease;
           will-change: transform;
           backface-visibility: hidden;
           cursor: default;
-          font-size: 2rem !important; /* base size */
-          color: #FFFFFF;
+          font-size: 2rem !important;
         }
         .social-icons-wrapper {
           display: flex;
