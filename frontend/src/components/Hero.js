@@ -184,12 +184,12 @@ export default function Hero() {
             data-aos-duration="900"
           >
             <div className="social-icons-wrapper">
-              <iconify-icon icon="ri:youtube-fill" class="social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
-              <iconify-icon icon="simple-icons:youtubeshorts" class="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
-              <iconify-icon icon="ri:instagram-fill" class="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
-              <iconify-icon icon="ri:facebook-fill" class="social-icon" aria-label="Facebook" role="img"></iconify-icon>
-              <iconify-icon icon="ri:twitter-x-fill" class="social-icon ms-4" aria-label="Twitter/X" role="img"></iconify-icon>
-              <iconify-icon icon="ri:linkedin-box-fill" class="social-icon ms-4" aria-label="LinkedIn" role="img"></iconify-icon>
+              <iconify-icon icon="ri:youtube-fill" className="social-icon me-4" aria-label="YouTube" role="img"></iconify-icon>
+              <iconify-icon icon="simple-icons:youtubeshorts" className="social-icon me-4" aria-label="YouTube Shorts" role="img"></iconify-icon>
+              <iconify-icon icon="ri:instagram-fill" className="social-icon me-4" aria-label="Instagram" role="img"></iconify-icon>
+              <iconify-icon icon="ri:facebook-fill" className="social-icon" aria-label="Facebook" role="img"></iconify-icon>
+              <iconify-icon icon="ri:twitter-x-fill" className="social-icon ms-4" aria-label="Twitter/X" role="img"></iconify-icon>
+              <iconify-icon icon="ri:linkedin-box-fill" className="social-icon ms-4" aria-label="LinkedIn" role="img"></iconify-icon>
             </div>
           </div>
         </div>
@@ -212,9 +212,24 @@ export default function Hero() {
           right: 20%; /* roughly place in the middle between Brand button and right edge */
           display: flex;
           gap: 0.75rem;
+          z-index: 0;
         }
         @media (min-width: 992px) {
           .social-row .social-icon { font-size: 2.5rem !important; }
+        }
+        @media (max-width: 576px) {
+          /* Place icons below the CTA buttons and center them on small screens */
+          .social-row { justify-content: center !important; padding-right: 0 !important; }
+          .social-icons-wrapper {
+            position: static !important;
+            top: auto !important;
+            right: auto !important;
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 12px;
+          }
         }
       `}</style>
     </section>
